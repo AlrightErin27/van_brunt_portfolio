@@ -1,11 +1,52 @@
 :root {
-  /* Colors */
+  /* ------------------------------ */
+  /* Background Colors */
+  /* ------------------------------ */
+  --bg-white: #ffffff;
+  --bg-cream: #fff8e7;
+  --bg-sky: #dceeff;
+  --bg-mari: #eee312;
+  --bg-chart: #c9c316;
 
+  /* ------------------------------ */
+  /* Text Colors */
+  /* All five work against all five */
+  /* background colors above */
+  /* ------------------------------ */
+  --text-black: #111111;
+  --text-bur: #5a1833;
+  --text-navy: #173a5e;
+  --text-cherry: #7a1023;
+
+  /* ------------------------------ */
+  /* Focus / Highlight / Link Colors */
+  /* ------------------------------ */
+  --focus-cherry: #d00036;
+  --focus-blue: #005fcc;
+  --link-blue: #003f88;
+
+  /* ------------------------------ */
   /* Typography */
+  /* ------------------------------ */
+  --font: "Times New Roman", Times, serif;
+  --font-accent: Helvetica, Arial, sans-serif;
 
+  /* ------------------------------ */
   /* Spacing */
+  /* ------------------------------ */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-xxl: 6rem;
 
+  /* ------------------------------ */
   /* Layout */
+  /* ------------------------------ */
+  --page-width: 1200px;
+  --content-width: 800px;
+  --page-padding: 1.5rem;
 }
 
 * {
@@ -18,5 +59,30 @@ html {
 }
 
 body {
+  min-height: 100vh;
   margin: 0;
+
+  font-family: var(--font);
+  line-height: 1.5;
+
+  background-color: var(--bg-sky);
+  color: var(--text-navy);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--link-blue);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--focus-cherry);
+  outline-offset: 3px;
 }

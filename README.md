@@ -1,46 +1,54 @@
-# Astro Starter Kit: Basics
+# Van Brunt Portfolio
 
-```sh
-npm create astro@latest -- --template basics
+My personal portfolio website, built with Astro and React and deployed with Vercel.
+
+This site will document my work as a software engineer as I grow my career in digital accessibility.
+
+## Live Site
+
+https://van-brunt-portfolio.vercel.app
+
+## Tech Stack
+
+- Astro
+- React
+- TypeScript
+- Vercel
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Start the local development server:
 
-## 🚀 Project Structure
+```bash
+npm run dev
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+The site will be available locally at:
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+http://localhost:4321
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Build the site for production:
 
-## 🧞 Commands
+```bash
+npm run build
+```
 
-All commands are run from the root of the project, from a terminal:
+Preview the production build locally:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+npm run preview
+```
 
-## 👀 Want to learn more?
+## Deployment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site is deployed through Vercel.
+
+Changes pushed to the `main` branch on GitHub will automatically trigger a new production deployment.

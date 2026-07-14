@@ -5,6 +5,7 @@
   --bg-white: #ffffff;
   --bg-cream: #fff8e7;
   --bg-sky: #dceeff;
+  --bg-azure: #bbcadb;
   --bg-mari: #eee312;
   --bg-chart: #c9c316;
 
@@ -28,8 +29,8 @@
   /* ------------------------------ */
   /* Typography */
   /* ------------------------------ */
-  --font: "Times New Roman", Times, serif;
-  --font-accent: Helvetica, Arial, sans-serif;
+  --font: Helvetica, Arial, sans-serif;
+  --font-accent: "Times New Roman", Times, serif;
 
   /* ------------------------------ */
   /* Spacing */
@@ -85,4 +86,10 @@ textarea:focus-visible,
 select:focus-visible {
   outline: 3px solid var(--focus-cherry);
   outline-offset: 3px;
+}
+
+.container {
+  width: min(calc(100% - (var(--page-padding) * 2)), var(--page-width));
+
+  margin-inline: auto;
 }

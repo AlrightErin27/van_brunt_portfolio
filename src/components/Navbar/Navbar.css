@@ -1,0 +1,30 @@
+.site-header {
+  width: 100%;
+  background-color: var(--bg-azure);
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-md);
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.nav-list a {
+  color: var(--text-bur);
+}
+
+.nav-list a[aria-current="page"] {
+  font-weight: bold;
+}

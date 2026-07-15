@@ -3,7 +3,9 @@
    ========================================================= */
 
 .home {
-	min-block-size: calc(100svh - 6.5rem - 6rem);
+	min-block-size:
+		calc(100svh - 6.5rem - 6rem);
+
 	background-color: var(--color-bg);
 }
 
@@ -19,7 +21,8 @@
 	display: flex;
 	align-items: center;
 
-	min-block-size: calc(100svh - 6.5rem);
+	min-block-size:
+		calc(100svh - 6.5rem - 6rem);
 
 	background-color: var(--color-bg);
 }
@@ -118,7 +121,7 @@
 	width: min(100%, 47rem);
 
 	padding-block:
-		clamp(var(--space-8), 10vh, var(--space-10));
+		clamp(var(--space-5), 4vh, var(--space-7));
 
 	padding-inline-start:
 		var(--page-padding);
@@ -134,7 +137,7 @@
 
 .hero__eyebrow {
 	margin-block-end:
-		clamp(var(--space-5), 3vw, var(--space-7));
+		clamp(var(--space-4), 2vh, var(--space-5));
 
 	color: var(--color-accent);
 
@@ -186,7 +189,7 @@
 	height: 0.125rem;
 
 	margin-block:
-		clamp(var(--space-6), 4vw, var(--space-8));
+		clamp(var(--space-5), 3vh, var(--space-6));
 
 	background-color: var(--color-accent);
 }
@@ -199,7 +202,7 @@
 .hero__description {
 	max-width: 42ch;
 
-	margin-block-end: var(--space-6);
+	margin-block-end: var(--space-5);
 
 	color: var(--color-text-secondary);
 
@@ -212,7 +215,6 @@
 
 	line-height: var(--line-height-body);
 }
-
 
 /* =========================================================
    PRIMARY CTA
@@ -335,7 +337,6 @@
 
 	.hero {
 		align-items: flex-end;
-
 		min-block-size: calc(100svh - 10rem);
 	}
 

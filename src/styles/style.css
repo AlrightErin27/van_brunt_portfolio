@@ -1,0 +1,347 @@
+/* =========================================================
+   GLOBAL DESIGN SYSTEM
+   Erin Van Brunt Portfolio
+   ========================================================= */
+
+:root {
+	/* -----------------------------------------------------
+	   FONT
+	   ----------------------------------------------------- */
+
+	--font-primary:
+		"Inter",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Helvetica,
+		Arial,
+		sans-serif;
+
+
+	/* -----------------------------------------------------
+	   COLORS
+	   ----------------------------------------------------- */
+
+	/* Core backgrounds */
+	--color-bg: #0d0f10;
+	--color-surface: #131517;
+	--color-surface-elevated: #191c1f;
+
+	/*
+	   Decorative borders may be subtle.
+	   Do not use --color-border as the sole visual indicator
+	   of an interactive control.
+	*/
+	--color-border: #3b3f43;
+
+	/*
+	   Strong enough for meaningful UI boundaries
+	   across our dark surfaces.
+	*/
+	--color-border-strong: #686e74;
+
+	/* Text */
+	--color-text: #f4f1ea;
+	--color-text-secondary: #d5d0c8;
+	--color-text-muted: #b8bec4;
+
+	/* Primary accent */
+	--color-accent: #d7ff3f;
+	--color-accent-hover: #e7ff4f;
+
+	/* Links */
+	--color-link: #f4f1ea;
+	--color-link-hover: #d7ff3f;
+
+	/* Focus */
+	--color-focus: #e7ff4f;
+
+	/* Selection */
+	--color-selection-bg: #d7ff3f;
+	--color-selection-text: #0d0f10;
+
+
+	/* -----------------------------------------------------
+	   TYPOGRAPHY SCALE
+	   ----------------------------------------------------- */
+
+	--text-xs: 0.875rem;
+	--text-sm: 1rem;
+	--text-base: 1rem;
+	--text-md: 1.125rem;
+	--text-lg: 1.25rem;
+	--text-xl: 1.5rem;
+	--text-2xl: 2rem;
+	--text-3xl: 2.75rem;
+
+	/* Large editorial display text */
+	--text-display: clamp(3.5rem, 7vw, 7.5rem);
+
+
+	/* -----------------------------------------------------
+	   FONT WEIGHTS
+	   ----------------------------------------------------- */
+
+	--weight-light: 300;
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-semibold: 600;
+
+
+	/* -----------------------------------------------------
+	   LINE HEIGHTS
+	   ----------------------------------------------------- */
+
+	--line-height-tight: 1;
+	--line-height-heading: 1.1;
+	--line-height-body: 1.6;
+
+
+	/* -----------------------------------------------------
+	   LETTER SPACING
+	   ----------------------------------------------------- */
+
+	--tracking-tight: -0.03em;
+	--tracking-normal: 0;
+	--tracking-wide: 0.08em;
+	--tracking-wider: 0.16em;
+
+
+	/* -----------------------------------------------------
+	   SPACING SCALE
+	   ----------------------------------------------------- */
+
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 3rem;
+	--space-8: 4rem;
+	--space-9: 6rem;
+	--space-10: 8rem;
+
+
+	/* -----------------------------------------------------
+	   LAYOUT
+	   ----------------------------------------------------- */
+
+	--content-max-width: 90rem;
+
+	/*
+	   Keeps long-form text comfortably below the
+	   80-character maximum referenced by WCAG AAA
+	   Visual Presentation.
+	*/
+	--text-max-width: 68ch;
+
+	--page-padding: clamp(1.25rem, 4vw, 4rem);
+
+
+	/* -----------------------------------------------------
+	   INTERACTION
+	   ----------------------------------------------------- */
+
+	/* AAA target-size goal */
+	--target-size-min: 2.75rem;
+
+
+	/* -----------------------------------------------------
+	   BORDERS
+	   ----------------------------------------------------- */
+
+	--border-width: 1px;
+	--border-radius-sm: 0.25rem;
+	--border-radius-md: 0.5rem;
+
+
+	/* -----------------------------------------------------
+	   FOCUS
+	   ----------------------------------------------------- */
+
+	--focus-width: 0.1875rem;
+	--focus-offset: 0.25rem;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: var(--font-primary);
+	background-color: var(--color-bg);
+	color: var(--color-text);
+
+	/* Respect the user's browser text-size preferences */
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+
+	background-color: var(--color-bg);
+	color: var(--color-text);
+
+	font-family: var(--font-primary);
+	font-size: var(--text-md);
+	font-weight: var(--weight-regular);
+	line-height: var(--line-height-body);
+
+	text-rendering: optimizeLegibility;
+}
+
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+img,
+picture,
+svg,
+canvas {
+	display: block;
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin-block-start: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--color-text);
+	font-weight: var(--weight-regular);
+	line-height: var(--line-height-heading);
+}
+
+p {
+	max-width: var(--text-max-width);
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+	color: var(--color-link);
+	text-decoration-line: underline;
+	text-decoration-thickness: 0.08em;
+	text-underline-offset: 0.2em;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+   ========================================================= */
+
+:focus-visible {
+	outline:
+		var(--focus-width)
+		solid
+		var(--color-focus);
+
+	outline-offset: var(--focus-offset);
+}
+
+/* =========================================================
+   TEXT SELECTION
+   ========================================================= */
+
+::selection {
+	background-color: var(--color-selection-bg);
+	color: var(--color-selection-text);
+}
+
+
+/* =========================================================
+   ACCESSIBILITY UTILITIES
+   ========================================================= */
+
+/*
+   Visually hidden content remains available
+   to screen readers.
+*/
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+
+/*
+   Skip link remains offscreen until focused.
+   We can add the actual link to Layout.astro later.
+*/
+
+.skip-link {
+	position: absolute;
+	top: var(--space-4);
+	left: var(--space-4);
+	z-index: 1000;
+
+	padding: var(--space-3) var(--space-4);
+
+	background-color: var(--color-accent);
+	color: var(--color-bg);
+
+	font-weight: var(--weight-semibold);
+
+	transform: translateY(-200%);
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}

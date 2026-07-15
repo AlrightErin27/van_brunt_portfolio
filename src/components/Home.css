@@ -3,7 +3,7 @@
    ========================================================= */
 
 .home {
-	min-block-size: calc(100svh - 6.5rem);
+	min-block-size: calc(100svh - 6.5rem - 6rem);
 	background-color: var(--color-bg);
 }
 

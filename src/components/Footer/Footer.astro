@@ -1,0 +1,68 @@
+---
+import {
+	EnvelopeSimpleIcon,
+	PersonArmsSpreadIcon,
+} from "@phosphor-icons/react/ssr";
+
+import "./Footer.css";
+
+/*
+	Replace this with the email address you want
+	visitors to use.
+*/
+const emailAddress = "YOUR_EMAIL@example.com";
+---
+
+<footer class="site-footer">
+	<div class="footer__inner">
+		<div class="footer__statement">
+			<span
+				class="footer__icon-frame"
+				aria-hidden="true"
+			>
+				<PersonArmsSpreadIcon
+					className="footer__accessibility-icon"
+					size={26}
+					weight="regular"
+					color="currentColor"
+					aria-hidden={true}
+					focusable={false}
+				/>
+			</span>
+
+			<p class="footer__message">
+				Accessibility is not a feature.
+				<span>It’s the foundation.</span>
+			</p>
+		</div>
+
+		<a
+			class="footer__contact"
+			href={`mailto:${emailAddress}`}
+		>
+			<EnvelopeSimpleIcon
+				className="footer__contact-icon"
+				size={22}
+				weight="regular"
+				color="currentColor"
+				aria-hidden={true}
+				focusable={false}
+			/>
+
+			<span>
+				Email me
+
+				<span class="visually-hidden">
+					, Erin Van Brunt
+				</span>
+			</span>
+
+			<span
+				class="footer__contact-arrow"
+				aria-hidden="true"
+			>
+				→
+			</span>
+		</a>
+	</div>
+</footer>

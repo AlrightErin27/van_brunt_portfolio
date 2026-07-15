@@ -323,7 +323,6 @@ a:hover {
 
 /*
    Skip link remains offscreen until focused.
-   We can add the actual link to Layout.astro later.
 */
 
 .skip-link {
@@ -332,16 +331,22 @@ a:hover {
 	left: var(--space-4);
 	z-index: 1000;
 
+	display: inline-flex;
+	align-items: center;
+
+	min-block-size: var(--target-size-min);
 	padding: var(--space-3) var(--space-4);
 
 	background-color: var(--color-accent);
 	color: var(--color-bg);
 
 	font-weight: var(--weight-semibold);
+	text-decoration: none;
 
 	transform: translateY(-200%);
 }
 
 .skip-link:focus {
 	transform: translateY(0);
+	color: var(--color-bg);
 }

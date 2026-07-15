@@ -1,4 +1,8 @@
 ---
+
+import { Image } from "astro:assets";
+import linkedinLogo from "../../assets/logos/linkedin.png";
+
 import {
 	EnvelopeSimpleIcon,
 	PersonArmsSpreadIcon,
@@ -6,11 +10,9 @@ import {
 
 import "./Footer.css";
 
-/*
-	Replace this with the email address you want
-	visitors to use.
-*/
-const emailAddress = "YOUR_EMAIL@example.com";
+const emailAddress = "erinmontybruce@gmail.com";
+const linkedinUrl = "https://www.linkedin.com/in/erin-van-brunt/";
+
 ---
 
 <footer class="site-footer">
@@ -36,33 +38,51 @@ const emailAddress = "YOUR_EMAIL@example.com";
 			</p>
 		</div>
 
-		<a
-			class="footer__contact"
-			href={`mailto:${emailAddress}`}
-		>
-			<EnvelopeSimpleIcon
-				className="footer__contact-icon"
-				size={22}
-				weight="regular"
-				color="currentColor"
-				aria-hidden={true}
-				focusable={false}
-			/>
-
-			<span>
-				Email me
-
-				<span class="visually-hidden">
-					, Erin Van Brunt
-				</span>
-			</span>
-
-			<span
-				class="footer__contact-arrow"
-				aria-hidden="true"
+		<div class="footer__actions">
+			<a
+				class="footer__linkedin"
+				href={linkedinUrl}
 			>
-				→
-			</span>
-		</a>
+				<Image
+					src={linkedinLogo}
+					alt=""
+					class="footer__linkedin-icon"
+					width={22}
+				/>
+
+				<span>LinkedIn</span>
+			</a>
+
+			<a
+				class="footer__contact"
+				href={`mailto:${emailAddress}`}
+			>
+				<EnvelopeSimpleIcon
+					className="footer__contact-icon"
+					size={22}
+					weight="regular"
+					color="currentColor"
+					aria-hidden={true}
+					focusable={false}
+				/>
+
+				<span>
+					Email me
+
+					<span class="visually-hidden">
+						, Erin Van Brunt
+					</span>
+				</span>
+
+				<span
+					class="footer__contact-arrow"
+					aria-hidden="true"
+				>
+					→
+				</span>
+			</a>
+
+
+		</div>
 	</div>
 </footer>

@@ -9,11 +9,12 @@ import "./Home.css";
 	<section class="hero" aria-labelledby="hero-heading">
 		<div class="hero__media">
 			<Image
-				src={heroImage}
-				alt=""
-				class="hero__image"
-				loading="eager"
-				decoding="async"
+			src={heroImage}
+			alt=""
+			class="hero__image"
+			priority
+			layout="full-width"
+			sizes="(max-width: 48rem) 100vw, 62vw"
 			/>
 		</div>
 

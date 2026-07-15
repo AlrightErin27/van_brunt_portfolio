@@ -1,11 +1,13 @@
 .site-header {
   width: 100%;
   background-color: var(--bg-azure);
+  font-size: var(--font-size-h3);
 }
 
 .navbar {
   display: flex;
   justify-content: center;
+
   padding-block: var(--space-md);
 }
 

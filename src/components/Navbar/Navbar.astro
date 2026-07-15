@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+
+import logo from "../../assets/logos/logo_trans_whitetext.png";
+import "./Navbar.css";
+
+const pathname = Astro.url.pathname;
+
+const navigation = [
+	{
+		label: "Home",
+		href: "/",
+	},
+	{
+		label: "Resume",
+		href: "/resume",
+	},
+	{
+		label: "Audits",
+		href: "/audits",
+	},
+	{
+		label: "Projects",
+		href: "/projects",
+	},
+	{
+		label: "Blog",
+		href: "/blog",
+	},
+];
+
+const isCurrentPage = (href: string) => {
+	if (href === "/") {
+		return pathname === "/";
+	}
+
+	return pathname.startsWith(href);
+};
+---
+
+<header class="site-header">
+	<nav class="navbar" aria-label="Primary navigation">
+<a
+	class="navbar__brand"
+	href="/"
+>
+	<Image
+		src={logo}
+		alt=""
+		class="navbar__logo"
+		width={96}
+	/>
+
+	<span class="navbar__name">
+		Erin Van Brunt
+	</span>
+
+	<span class="visually-hidden">
+		, home
+	</span>
+</a>
+
+		<ul class="navbar__links">
+			{
+				navigation.map((item) => (
+					<li class="navbar__item">
+						<a
+							class="navbar__link"
+							href={item.href}
+							aria-current={
+								isCurrentPage(item.href)
+									? "page"
+									: undefined
+							}
+						>
+							{item.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+</header>

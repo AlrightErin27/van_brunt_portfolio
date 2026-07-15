@@ -1,0 +1,436 @@
+/* =========================================================
+   HOME
+   ========================================================= */
+
+.home {
+	min-block-size: calc(100svh - 6.5rem);
+	background-color: var(--color-bg);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+	position: relative;
+	isolation: isolate;
+
+	display: flex;
+	align-items: center;
+
+	min-block-size: calc(100svh - 6.5rem);
+
+	background-color: var(--color-bg);
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.hero__media {
+	position: absolute;
+	z-index: -3;
+
+	inset-block: 0;
+	inset-inline-end: 0;
+
+	width: 62%;
+	overflow: hidden;
+}
+
+.hero__media::before {
+	content: "";
+
+	position: absolute;
+	z-index: 1;
+	inset: 0;
+
+	/*
+		Softens the image slightly so the page feels
+		editorial rather than overly bright.
+	*/
+	background:
+		linear-gradient(
+			to right,
+			var(--color-bg) 0%,
+			rgb(13 15 16 / 80%) 10%,
+			rgb(13 15 16 / 35%) 28%,
+			transparent 52%
+		);
+}
+
+.hero__image {
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+
+	/*
+		The image remains intentionally vivid,
+		but slightly controlled to match the mockup.
+	*/
+	filter:
+		saturate(0.95)
+		contrast(1.03);
+}
+
+
+/* =========================================================
+   GLOBAL HERO OVERLAY
+   ========================================================= */
+
+.hero__overlay {
+	position: absolute;
+	z-index: -2;
+	inset: 0;
+
+	pointer-events: none;
+
+	background:
+		linear-gradient(
+			90deg,
+			var(--color-bg) 0%,
+			var(--color-bg) 35%,
+			rgb(13 15 16 / 90%) 43%,
+			rgb(13 15 16 / 48%) 60%,
+			rgb(13 15 16 / 8%) 100%
+		),
+		linear-gradient(
+			180deg,
+			rgb(13 15 16 / 8%) 0%,
+			rgb(13 15 16 / 5%) 68%,
+			rgb(13 15 16 / 45%) 100%
+		);
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero__content {
+	position: relative;
+	z-index: 1;
+
+	width: min(100%, 47rem);
+
+	padding-block:
+		clamp(var(--space-8), 10vh, var(--space-10));
+
+	padding-inline-start:
+		var(--page-padding);
+
+	padding-inline-end:
+		var(--space-6);
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.hero__eyebrow {
+	margin-block-end:
+		clamp(var(--space-5), 3vw, var(--space-7));
+
+	color: var(--color-accent);
+
+	font-size: var(--text-xs);
+	font-weight: var(--weight-semibold);
+	line-height: 1.4;
+
+	letter-spacing: var(--tracking-wider);
+	text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.hero__title {
+	max-width: 10ch;
+
+	margin: 0;
+
+	color: var(--color-text);
+
+	font-size:
+		clamp(
+			3.5rem,
+			7.1vw,
+			7.25rem
+		);
+
+	font-weight: var(--weight-light);
+	line-height: var(--line-height-tight);
+
+	letter-spacing: var(--tracking-tight);
+	text-wrap: balance;
+}
+
+.hero__title span {
+	display: block;
+}
+
+
+/* =========================================================
+   ACCENT RULE
+   ========================================================= */
+
+.hero__rule {
+	width: 3.25rem;
+	height: 0.125rem;
+
+	margin-block:
+		clamp(var(--space-6), 4vw, var(--space-8));
+
+	background-color: var(--color-accent);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.hero__description {
+	max-width: 42ch;
+
+	margin-block-end: var(--space-6);
+
+	color: var(--color-text-secondary);
+
+	font-size:
+		clamp(
+			var(--text-base),
+			1.35vw,
+			var(--text-md)
+		);
+
+	line-height: var(--line-height-body);
+}
+
+
+/* =========================================================
+   PRIMARY CTA
+   ========================================================= */
+
+.hero__cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-6);
+
+	min-block-size: var(--target-size-min);
+
+	padding:
+		var(--space-3)
+		var(--space-5);
+
+	border:
+		var(--border-width)
+		solid
+		var(--color-accent);
+
+	border-radius: var(--border-radius-sm);
+
+	background-color: transparent;
+	color: var(--color-accent);
+
+	font-size: var(--text-xs);
+	font-weight: var(--weight-semibold);
+	line-height: 1.2;
+
+	letter-spacing: var(--tracking-wider);
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.hero__cta:hover {
+	background-color: var(--color-accent);
+	color: var(--color-bg);
+}
+
+.hero__cta:focus-visible {
+	background-color: var(--color-accent);
+	color: var(--color-bg);
+}
+
+
+/* =========================================================
+   CTA ARROW
+   ========================================================= */
+
+.hero__cta-arrow {
+	display: inline-block;
+
+	font-size: var(--text-lg);
+	font-weight: var(--weight-regular);
+	line-height: 1;
+}
+
+
+/* =========================================================
+   LARGE SCREENS
+   ========================================================= */
+
+@media (min-width: 90rem) {
+	.hero__content {
+		width: min(100%, 52rem);
+	}
+
+	.hero__media {
+		width: 60%;
+	}
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 64rem) {
+	.hero__media {
+		width: 70%;
+	}
+
+	.hero__overlay {
+		background:
+			linear-gradient(
+				90deg,
+				var(--color-bg) 0%,
+				var(--color-bg) 32%,
+				rgb(13 15 16 / 92%) 47%,
+				rgb(13 15 16 / 50%) 72%,
+				rgb(13 15 16 / 20%) 100%
+			);
+	}
+
+	.hero__content {
+		width: min(100%, 43rem);
+	}
+
+	.hero__title {
+		font-size:
+			clamp(
+				3.5rem,
+				8.5vw,
+				6rem
+			);
+	}
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 48rem) {
+	.home {
+		min-block-size: auto;
+	}
+
+	.hero {
+		align-items: flex-end;
+
+		min-block-size: calc(100svh - 10rem);
+	}
+
+	.hero__media {
+		inset: 0;
+
+		width: 100%;
+		height: 100%;
+	}
+
+	.hero__media::before {
+		background:
+			linear-gradient(
+				to bottom,
+				rgb(13 15 16 / 15%) 0%,
+				rgb(13 15 16 / 30%) 30%,
+				rgb(13 15 16 / 86%) 68%,
+				var(--color-bg) 100%
+			);
+	}
+
+	.hero__image {
+		object-position: 58% center;
+	}
+
+	.hero__overlay {
+		background:
+			linear-gradient(
+				180deg,
+				rgb(13 15 16 / 18%) 0%,
+				rgb(13 15 16 / 35%) 35%,
+				rgb(13 15 16 / 92%) 72%,
+				var(--color-bg) 100%
+			);
+	}
+
+	.hero__content {
+		width: 100%;
+
+		padding-block-start: var(--space-10);
+		padding-block-end: var(--space-7);
+
+		padding-inline:
+			var(--page-padding);
+	}
+
+	.hero__eyebrow {
+		margin-block-end: var(--space-5);
+	}
+
+	.hero__title {
+		max-width: 11ch;
+
+		font-size:
+			clamp(
+				2.5rem,
+				13vw,
+				5.25rem
+			);
+	}
+
+	.hero__rule {
+		margin-block:
+			var(--space-6);
+	}
+
+	.hero__description {
+		max-width: 36ch;
+	}
+
+	.hero__cta {
+		width: min(100%, 18rem);
+	}
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 30rem) {
+	.hero__title {
+		font-size:
+			clamp(
+				2.25rem,
+				12vw,
+				4rem
+			);
+	}
+
+	.hero__description {
+		font-size: var(--text-base);
+	}
+
+	.hero__cta {
+		width: 100%;
+	}
+}

@@ -186,8 +186,14 @@ html {
 }
 
 body {
-	min-height: 100vh;
+	min-block-size: 100svh;
 	margin: 0;
+
+	display: grid;
+	grid-template-rows:
+		auto
+		1fr
+		auto;
 
 	background-color: var(--color-bg);
 	color: var(--color-text);

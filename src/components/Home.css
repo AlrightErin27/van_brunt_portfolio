@@ -3,8 +3,8 @@
    ========================================================= */
 
 .home {
-	min-block-size:
-		calc(100svh - 6.5rem - 6rem);
+	display: grid;
+	min-block-size: 100%;
 
 	background-color: var(--color-bg);
 }
@@ -21,8 +21,7 @@
 	display: flex;
 	align-items: center;
 
-	min-block-size:
-		calc(100svh - 6.5rem - 6rem);
+	min-block-size: 100%;
 
 	background-color: var(--color-bg);
 }

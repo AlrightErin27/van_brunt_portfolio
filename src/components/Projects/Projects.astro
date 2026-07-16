@@ -5,9 +5,8 @@ type Project = {
 	title: string;
 	label: string;
 	description: string;
-	topics: string[];
-	visual: "evo" | "quiet-signal" | "open-form" | "clear-route";
-	href?: string;
+	href: string;
+	status: "available" | "coming-soon";
 };
 
 const projects: Project[] = [
@@ -15,55 +14,25 @@ const projects: Project[] = [
 		title: "Evo",
 		label: "Featured project",
 		description:
-			"My first featured portfolio project. The full case study will document the problem, my role, key accessibility decisions, and the final outcome.",
-		topics: [
-			"Accessibility",
-			"Product design",
-			"Case study",
-		],
-		visual: "evo",
-
-		/*
-		 * Change this to "/projects/evo" when that page exists.
-		 * Leaving it undefined prevents a broken link.
-		 */
-		href: undefined,
+			"An accessible virtual pet experience built around a terminal-style interface and an evolving pixel creature.",
+		href: "/projects/evo",
+		status: "available",
 	},
 	{
-		title: "Quiet Signal",
-		label: "Concept placeholder",
+		title: "Coming Soon",
+		label: "Future project",
 		description:
-			"A placeholder for a future case study exploring accessible alerts, notifications, and clear status communication.",
-		topics: [
-			"Inclusive UX",
-			"Notifications",
-			"Prototype",
-		],
-		visual: "quiet-signal",
+			"A future case study exploring accessible alerts, notifications, and clear status communication.",
+		href: "/projects/quiet-signal",
+		status: "coming-soon",
 	},
 	{
-		title: "Open Form",
-		label: "Concept placeholder",
+		title: "Coming Soon",
+		label: "Future project",
 		description:
-			"A placeholder for a future project focused on understandable forms, error prevention, and accessible validation.",
-		topics: [
-			"Forms",
-			"Error handling",
-			"Usability",
-		],
-		visual: "open-form",
-	},
-	{
-		title: "Clear Route",
-		label: "Concept placeholder",
-		description:
-			"A placeholder for a future accessibility project centered on navigation, orientation, and digital wayfinding.",
-		topics: [
-			"Wayfinding",
-			"Navigation",
-			"Information architecture",
-		],
-		visual: "clear-route",
+			"A future project focused on understandable forms, error prevention, and accessible validation.",
+		href: "/projects/open-form",
+		status: "coming-soon",
 	},
 ];
 ---
@@ -116,103 +85,90 @@ const projects: Project[] = [
 				<h2 id="project-list-title">
 					Selected projects
 				</h2>
-
-				<p aria-hidden="true">
-					{String(projects.length).padStart(2, "0")}
-				</p>
 			</div>
 
 			<ul class="projects-grid">
 				{
 					projects.map((project, index) => {
+						const projectNumber = String(
+							index + 1,
+						).padStart(2, "0");
+
 						const titleId =
-							`project-${project.visual}-title`;
+							`project-${index + 1}-title`;
+
+						const linkLabelId =
+							`project-${index + 1}-link-label`;
 
 						return (
-							<li
-								class:list={[
-									"project-card",
-									`project-card--${project.visual}`,
-								]}
-							>
+							<li class="project-card">
 								<article
 									class="project-card__article"
 									aria-labelledby={titleId}
 								>
-									<div
-										class="project-card__visual"
-										aria-hidden="true"
+									<a
+										class="project-card__surface project-card__surface--link"
+										href={project.href}
+										aria-labelledby={`${linkLabelId} ${titleId}`}
 									>
-										<span class="project-card__number">
-											{String(index + 1).padStart(
-												2,
-												"0",
-											)}
+										<span
+											id={linkLabelId}
+											class="visually-hidden"
+										>
+											View project:
 										</span>
-									</div>
 
-									<div class="project-card__body">
-										<p class="project-card__label">
-											{project.label}
-										</p>
-
-										<h3
-											id={titleId}
-											class="project-card__title"
+										<div
+											class="project-card__visual"
+											aria-hidden="true"
 										>
-											{project.title}
-										</h3>
-
-										<p class="project-card__description">
-											{project.description}
-										</p>
-
-										<ul
-											class="project-card__topics"
-											aria-label={`${project.title} project topics`}
-										>
-											{
-												project.topics.map(
-													(topic) => (
-														<li>{topic}</li>
-													),
-												)
-											}
-										</ul>
-
-										<div class="project-card__action">
-											{
-												project.href ? (
-													<a
-														class="project-card__link"
-														href={
-															project.href
-														}
-													>
-														<span>
-															View{" "}
-															{
-																project.title
-															}{" "}
-															case study
-														</span>
-
-														<span
-															aria-hidden="true"
-															class="project-card__arrow"
-														>
-															→
-														</span>
-													</a>
-												) : (
-													<p class="project-card__coming-soon">
-														Case study
-														coming soon
-													</p>
-												)
-											}
+											<span class="project-card__number">
+												{projectNumber}
+											</span>
 										</div>
-									</div>
+
+										<div class="project-card__body">
+											<p class="project-card__label">
+												{project.label}
+											</p>
+
+											<h3
+												id={titleId}
+												class="project-card__title"
+											>
+												{project.title}
+											</h3>
+
+											<p class="project-card__description">
+												{project.description}
+											</p>
+
+											<div class="project-card__action">
+												<p
+													class:list={[
+														project.status ===
+														"available"
+															? "project-card__cta"
+															: "project-card__coming-soon",
+													]}
+													aria-hidden="true"
+												>
+													<span>
+														{
+															project.status ===
+															"available"
+																? "View project"
+																: "Project coming soon"
+														}
+													</span>
+
+													<span class="project-card__arrow">
+														→
+													</span>
+												</p>
+											</div>
+										</div>
+									</a>
 								</article>
 							</li>
 						);

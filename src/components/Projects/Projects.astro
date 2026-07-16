@@ -1,0 +1,224 @@
+---
+import "./Projects.css";
+
+type Project = {
+	title: string;
+	label: string;
+	description: string;
+	topics: string[];
+	visual: "evo" | "quiet-signal" | "open-form" | "clear-route";
+	href?: string;
+};
+
+const projects: Project[] = [
+	{
+		title: "Evo",
+		label: "Featured project",
+		description:
+			"My first featured portfolio project. The full case study will document the problem, my role, key accessibility decisions, and the final outcome.",
+		topics: [
+			"Accessibility",
+			"Product design",
+			"Case study",
+		],
+		visual: "evo",
+
+		/*
+		 * Change this to "/projects/evo" when that page exists.
+		 * Leaving it undefined prevents a broken link.
+		 */
+		href: undefined,
+	},
+	{
+		title: "Quiet Signal",
+		label: "Concept placeholder",
+		description:
+			"A placeholder for a future case study exploring accessible alerts, notifications, and clear status communication.",
+		topics: [
+			"Inclusive UX",
+			"Notifications",
+			"Prototype",
+		],
+		visual: "quiet-signal",
+	},
+	{
+		title: "Open Form",
+		label: "Concept placeholder",
+		description:
+			"A placeholder for a future project focused on understandable forms, error prevention, and accessible validation.",
+		topics: [
+			"Forms",
+			"Error handling",
+			"Usability",
+		],
+		visual: "open-form",
+	},
+	{
+		title: "Clear Route",
+		label: "Concept placeholder",
+		description:
+			"A placeholder for a future accessibility project centered on navigation, orientation, and digital wayfinding.",
+		topics: [
+			"Wayfinding",
+			"Navigation",
+			"Information architecture",
+		],
+		visual: "clear-route",
+	},
+];
+---
+
+<main
+	id="main-content"
+	tabindex="-1"
+	class="projects-page"
+>
+	<div class="projects-page__inner">
+		<header class="projects-page__intro">
+			<div>
+				<p class="projects-page__eyebrow">
+					Selected work
+				</p>
+
+				<h1 class="projects-page__title">
+					Projects built
+					with access
+					in mind.
+				</h1>
+			</div>
+
+			<div class="projects-page__summary">
+				<div
+					class="projects-page__accent-line"
+					aria-hidden="true"
+				></div>
+
+				<p>
+					A growing collection of projects,
+					experiments, and case studies that
+					bring accessibility, engineering, and
+					visual design together.
+				</p>
+
+				<p>
+					Each completed project will include
+					the problem, my process, accessibility
+					decisions, and what I learned.
+				</p>
+			</div>
+		</header>
+
+		<section
+			class="projects-collection"
+			aria-labelledby="project-list-title"
+		>
+			<div class="projects-collection__heading">
+				<h2 id="project-list-title">
+					Selected projects
+				</h2>
+
+				<p aria-hidden="true">
+					{String(projects.length).padStart(2, "0")}
+				</p>
+			</div>
+
+			<ul class="projects-grid">
+				{
+					projects.map((project, index) => {
+						const titleId =
+							`project-${project.visual}-title`;
+
+						return (
+							<li
+								class:list={[
+									"project-card",
+									`project-card--${project.visual}`,
+								]}
+							>
+								<article
+									class="project-card__article"
+									aria-labelledby={titleId}
+								>
+									<div
+										class="project-card__visual"
+										aria-hidden="true"
+									>
+										<span class="project-card__number">
+											{String(index + 1).padStart(
+												2,
+												"0",
+											)}
+										</span>
+									</div>
+
+									<div class="project-card__body">
+										<p class="project-card__label">
+											{project.label}
+										</p>
+
+										<h3
+											id={titleId}
+											class="project-card__title"
+										>
+											{project.title}
+										</h3>
+
+										<p class="project-card__description">
+											{project.description}
+										</p>
+
+										<ul
+											class="project-card__topics"
+											aria-label={`${project.title} project topics`}
+										>
+											{
+												project.topics.map(
+													(topic) => (
+														<li>{topic}</li>
+													),
+												)
+											}
+										</ul>
+
+										<div class="project-card__action">
+											{
+												project.href ? (
+													<a
+														class="project-card__link"
+														href={
+															project.href
+														}
+													>
+														<span>
+															View{" "}
+															{
+																project.title
+															}{" "}
+															case study
+														</span>
+
+														<span
+															aria-hidden="true"
+															class="project-card__arrow"
+														>
+															→
+														</span>
+													</a>
+												) : (
+													<p class="project-card__coming-soon">
+														Case study
+														coming soon
+													</p>
+												)
+											}
+										</div>
+									</div>
+								</article>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</section>
+	</div>
+</main>

@@ -1,0 +1,232 @@
+---
+import "./Evo.css";
+
+/*
+	Uncomment these imports after the components exist.
+
+	import Monitor from "./Monitor.astro";
+	import Terminal from "./Terminal.astro";
+	import SidePanel from "./SidePanel.astro";
+*/
+---
+
+<main
+	id="main-content"
+	class="evo"
+	tabindex="-1"
+>
+	<div class="evo__inner">
+		<header class="evo__intro">
+			<div class="evo__intro-heading">
+				<p class="evo__eyebrow">
+					Interactive project
+				</p>
+
+				<h1 class="evo__title">
+					Evo
+				</h1>
+			</div>
+
+			<div class="evo__summary">
+				<div
+					class="evo__accent-line"
+					aria-hidden="true"
+				></div>
+
+				<p class="evo__description">
+					Hatch a conversational creature that
+					evolves through your answers.
+				</p>
+
+				<p class="evo__supporting-text">
+					Evo is an accessibility-first, session-based AI pet powered by Google Gemini. Through conversation, your answers shape its personality, behavior, and appearance—showcasing practical AI integration and accessible interaction design.
+				</p>
+			</div>
+		</header>
+
+		<section
+			class="evo-console"
+			aria-labelledby="evo-console-title"
+		>
+			<header class="evo-console__header">
+				<div>
+					<p class="evo-console__eyebrow">
+						Evo creature system
+					</p>
+
+					<h2
+						id="evo-console-title"
+						class="evo-console__title"
+					>
+						<!-- monitor display -->
+					</h2>
+				</div>
+
+				<p class="evo-console__status">
+					<span
+						class="evo-console__status-indicator"
+						aria-hidden="true"
+					></span>
+
+					Live
+				</p>
+			</header>
+
+			<div class="evo-console__layout">
+				<div class="evo-console__primary">
+					<div class="evo-console__slot">
+						<!-- Replace this section with <Monitor /> -->
+
+						<section
+							class="evo-placeholder evo-placeholder--monitor"
+							aria-labelledby="evo-monitor-title"
+						>
+							<div class="evo-placeholder__header">
+								<h3
+									id="evo-monitor-title"
+									class="evo-placeholder__title"
+								>
+									Evolution display
+								</h3>
+
+								<p class="evo-placeholder__meta">
+									50 × 30 grid
+								</p>
+							</div>
+
+							<div class="evo-monitor-preview">
+								<div class="evo-placeholder__message">
+									<p class="evo-placeholder__component-name">
+										Monitor component
+									</p>
+
+									<p>
+										The egg and evolving creature
+										will appear here.
+									</p>
+								</div>
+							</div>
+						</section>
+					</div>
+
+					<div class="evo-console__slot">
+						<!-- Replace this section with <Terminal /> -->
+
+						<section
+							class="evo-placeholder evo-placeholder--terminal"
+							aria-labelledby="evo-terminal-title"
+						>
+							<div class="evo-placeholder__header">
+								<h3
+									id="evo-terminal-title"
+									class="evo-placeholder__title"
+								>
+									Dialogue terminal
+								</h3>
+
+								<p class="evo-placeholder__meta">
+									Session inactive
+								</p>
+							</div>
+
+							<div class="evo-terminal-preview">
+								<p class="evo-terminal-preview__prompt">
+									<span aria-hidden="true">
+										&gt;
+									</span>
+
+									Terminal component
+								</p>
+
+								<p>
+									The pet-name field, conversation
+									history, questions, and answer
+									controls will live here.
+								</p>
+							</div>
+						</section>
+					</div>
+				</div>
+
+				<div class="evo-console__slot evo-console__slot--side">
+					<!-- Replace this aside with <SidePanel /> -->
+
+					<aside
+						class="evo-placeholder evo-side-panel"
+						aria-labelledby="evo-controls-title"
+					>
+						<div class="evo-side-panel__heading">
+							<p class="evo-side-panel__eyebrow">
+								Console panel
+							</p>
+
+							<h3
+								id="evo-controls-title"
+								class="evo-side-panel__title"
+							>
+								System controls
+							</h3>
+						</div>
+
+						<div class="evo-side-panel__controls">
+							<button
+								class="evo-control"
+								type="button"
+								disabled
+							>
+								<span
+									class="evo-control__number"
+									aria-hidden="true"
+								>
+									01
+								</span>
+
+								<span>
+									Start over
+								</span>
+							</button>
+
+							<button
+								class="evo-control"
+								type="button"
+								disabled
+							>
+								<span
+									class="evo-control__number"
+									aria-hidden="true"
+								>
+									02
+								</span>
+
+								<span>
+									How to play
+								</span>
+							</button>
+
+							<button
+								class="evo-control"
+								type="button"
+								disabled
+							>
+								<span
+									class="evo-control__number"
+									aria-hidden="true"
+								>
+									03
+								</span>
+
+								<span>
+									Accessibility settings
+								</span>
+							</button>
+						</div>
+
+						<p class="evo-side-panel__note">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam est sapien, pulvinar vel sem eu, consectetur porta diam. Nunc sit amet mauris scelerisque, gravida nibh sit amet, dignissim tellus.
+						</p>
+					</aside>
+				</div>
+			</div>
+		</section>
+	</div>
+</main>

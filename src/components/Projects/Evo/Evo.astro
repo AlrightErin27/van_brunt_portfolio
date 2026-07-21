@@ -1,24 +1,9 @@
 ---
 import "./Evo.css";
 
-/*
-	TODO: Import these components after their files exist.
-
-	import Monitor from "./Monitor.astro";
-	import Terminal from "./Terminal.astro";
-	import SidePanel from "./SidePanel.astro";
-
-	Evo.astro should remain responsible for:
-	- The page introduction
-	- The overall console layout
-	- The primary heading hierarchy
-
-	The imported components should manage their own:
-	- Internal markup
-	- Interactive behavior
-	- Component-specific accessibility
-	- Component-specific CSS
-*/
+import Monitor from "./Components/Monitor/Monitor.astro"
+import Terminal from "./Components/Terminal/Terminal.astro"
+import SidePanel from "./Components/SidePanel/SidePanel.astro"
 ---
 
 <main
@@ -116,22 +101,12 @@ import "./Evo.css";
 			<div class="evo-console__layout">
 				<div class="evo-console__primary">
 					<div class="evo-console__slot">
-						<!--
-							TODO: Replace this entire placeholder section
-							with the Monitor component:
+			
 
 							<Monitor />
 
-							The completed Monitor component should:
-							- Render the 50 × 30 SVG grid
-							- Give the SVG role="img"
-							- Include an accessible title and description
-							- Update the description when the pet changes
-							- Avoid announcing purely decorative animation
-							- Respect prefers-reduced-motion
-						-->
 
-						<section
+						<!-- <section
 							class="evo-placeholder evo-placeholder--monitor"
 							aria-labelledby="evo-monitor-title"
 						>
@@ -158,7 +133,7 @@ import "./Evo.css";
 									</p>
 								</div>
 							</div>
-						</section>
+						</section> -->
 					</div>
 
 					<div class="evo-console__slot">

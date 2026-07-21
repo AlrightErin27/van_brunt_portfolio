@@ -1,0 +1,407 @@
+---
+import "./Monitor.css";
+
+/*
+	TODO — FUTURE MONITOR WORK
+
+	This first version renders a static egg.
+
+	Later, the Monitor will receive the current pet state and combine:
+	- Base body
+	- Eyes
+	- Mouth
+	- Ears
+	- Tail
+	- Legs, wings, or fins
+	- Patterns
+	- Color palette
+	- Expression and movement state
+
+	The AI will select supported traits, but application code will
+	continue to control all coordinates and rendering.
+*/
+
+type Cell = readonly [number, number];
+
+type EggTone =
+	| "outline"
+	| "shell"
+	| "shadow"
+	| "highlight"
+	| "marking";
+
+type EggCell = {
+	x: number;
+	y: number;
+	tone: EggTone;
+};
+
+interface Props {
+	/*
+		Used in the SVG's accessible title and description.
+
+		The default works before the player has entered a name.
+	*/
+	petName?: string;
+
+	/*
+		Turn this on temporarily when checking the location of the
+		centered 20 × 20 pet drawing area.
+
+		Example:
+		<Monitor showPetArea={true} />
+	*/
+	showPetArea?: boolean;
+
+	/*
+		Keeps SVG IDs unique if the Monitor is ever rendered more
+		than once on the same page.
+	*/
+	idPrefix?: string;
+}
+
+const {
+	petName = "Evo pet",
+	showPetArea = false,
+	idPrefix = "evo-monitor",
+} = Astro.props;
+
+const accessiblePetName =
+	petName.trim() || "Evo pet";
+
+const headingId =
+	`${idPrefix}-heading`;
+
+const imageTitleId =
+	`${idPrefix}-image-title`;
+
+const imageDescriptionId =
+	`${idPrefix}-image-description`;
+
+const gridPatternId =
+	`${idPrefix}-grid-pattern`;
+
+/*
+	The full Monitor uses a 50 × 30 world.
+
+	The pet occupies a centered 20 × 20 local drawing area.
+	Moving this object later will move the entire pet without
+	changing the coordinates of its individual body parts.
+*/
+const petArea = {
+	x: 15,
+	y: 5,
+	width: 20,
+	height: 20,
+} as const;
+
+/*
+	The egg is stored in local 20 × 20 coordinates.
+
+	Each row describes:
+	- Its local y coordinate
+	- The first occupied x coordinate
+	- The final occupied x coordinate
+*/
+const eggRows = [
+	{ y: 3, start: 8, end: 11 },
+	{ y: 4, start: 6, end: 13 },
+	{ y: 5, start: 5, end: 14 },
+	{ y: 6, start: 4, end: 15 },
+	{ y: 7, start: 4, end: 15 },
+	{ y: 8, start: 3, end: 16 },
+	{ y: 9, start: 3, end: 16 },
+	{ y: 10, start: 3, end: 16 },
+	{ y: 11, start: 3, end: 16 },
+	{ y: 12, start: 4, end: 15 },
+	{ y: 13, start: 4, end: 15 },
+	{ y: 14, start: 5, end: 14 },
+	{ y: 15, start: 6, end: 13 },
+	{ y: 16, start: 8, end: 11 },
+] as const;
+
+const localEggCells: Cell[] =
+	eggRows.flatMap(({ y, start, end }) =>
+		Array.from(
+			{ length: end - start + 1 },
+			(_, offset) =>
+				[start + offset, y] as Cell,
+		),
+	);
+
+function cellKey([x, y]: Cell): string {
+	return `${x},${y}`;
+}
+
+const eggCellKeys = new Set(
+	localEggCells.map(cellKey),
+);
+
+/*
+	Small highlights on the upper-left portion of the shell.
+*/
+const highlightCells = [
+	[6, 6],
+	[6, 7],
+	[5, 8],
+	[6, 8],
+	[5, 9],
+] satisfies readonly Cell[];
+
+const highlightKeys = new Set(
+	highlightCells.map((cell) =>
+		cellKey(cell),
+	),
+);
+
+
+/*
+	A chartreuse crack that hints the egg is ready to hatch.
+*/
+const markingCells = [
+	[9, 7],
+	[10, 7],
+	[10, 8],
+	[11, 8],
+	[10, 9],
+	[10, 10],
+	[9, 10],
+	[9, 11],
+] satisfies readonly Cell[];
+
+const markingKeys = new Set(
+	markingCells.map((cell) =>
+		cellKey(cell),
+	),
+);
+
+function isOutlineCell(
+	[x, y]: Cell,
+): boolean {
+	const neighboringCells: Cell[] = [
+		[x - 1, y],
+		[x + 1, y],
+		[x, y - 1],
+		[x, y + 1],
+	];
+
+	return neighboringCells.some(
+		(neighbor) =>
+			!eggCellKeys.has(
+				cellKey(neighbor),
+			),
+	);
+}
+
+function getEggTone(
+	cell: Cell,
+): EggTone {
+	const [x, y] = cell;
+	const key = cellKey(cell);
+
+	if (isOutlineCell(cell)) {
+		return "outline";
+	}
+
+	if (markingKeys.has(key)) {
+		return "marking";
+	}
+
+	if (highlightKeys.has(key)) {
+		return "highlight";
+	}
+
+	if (
+		(x >= 12 && y >= 7) ||
+		y >= 13
+	) {
+		return "shadow";
+	}
+
+	return "shell";
+}
+
+function localToWorld(
+	[x, y]: Cell,
+): Cell {
+	return [
+		x + petArea.x,
+		y + petArea.y,
+	];
+}
+
+const eggCells: EggCell[] =
+	localEggCells.map((cell) => {
+		const [x, y] =
+			localToWorld(cell);
+
+		return {
+			x,
+			y,
+			tone: getEggTone(cell),
+		};
+	});
+
+/*
+	A small decorative ground shadow beneath the egg.
+	The shadow also uses local pet coordinates.
+*/
+const localGroundShadowCells: Cell[] = [
+	[7, 17],
+	[8, 17],
+	[9, 17],
+	[10, 17],
+	[11, 17],
+	[12, 17],
+	[5, 18],
+	[6, 18],
+	[7, 18],
+	[8, 18],
+	[9, 18],
+	[10, 18],
+	[11, 18],
+	[12, 18],
+	[13, 18],
+	[14, 18],
+];
+
+const groundShadowCells =
+	localGroundShadowCells.map(
+		localToWorld,
+	);
+
+const imageTitle =
+	`${accessiblePetName}, currently an egg`;
+
+const imageDescription =
+	`${accessiblePetName} is shown as a cream-colored pixel egg with a chartreuse crack, centered on a 50-column by 30-row grid.`;
+---
+
+<section
+	class="monitor"
+	aria-labelledby={headingId}
+>
+	<header class="monitor__header">
+		<h3
+			id={headingId}
+			class="monitor__title"
+		>
+			Evolution display
+		</h3>
+
+		<p class="monitor__meta">
+			<span aria-hidden="true">
+				50 × 30 grid
+			</span>
+
+			<span class="visually-hidden">
+				Grid size: 50 columns by 30 rows.
+			</span>
+		</p>
+	</header>
+
+	<div class="monitor__hardware">
+		<div class="monitor__screen">
+			<svg
+				class="monitor__display"
+				viewBox="0 0 50 30"
+				role="img"
+				aria-labelledby={`${imageTitleId} ${imageDescriptionId}`}
+				preserveAspectRatio="xMidYMid meet"
+				focusable="false"
+				shape-rendering="crispEdges"
+			>
+				<title id={imageTitleId}>
+					{imageTitle}
+				</title>
+
+				<desc id={imageDescriptionId}>
+					{imageDescription}
+				</desc>
+
+				<defs>
+					<pattern
+						id={gridPatternId}
+						width="1"
+						height="1"
+						patternUnits="userSpaceOnUse"
+					>
+						<path
+							class="monitor__grid-line"
+							d="M 1 0 L 0 0 0 1"
+						/>
+					</pattern>
+				</defs>
+
+				<rect
+					class="monitor__grid-background"
+					x="0"
+					y="0"
+					width="50"
+					height="30"
+				/>
+
+				<rect
+					class="monitor__grid"
+					x="0"
+					y="0"
+					width="50"
+					height="30"
+					fill={`url(#${gridPatternId})`}
+					aria-hidden="true"
+				/>
+
+				{
+					showPetArea && (
+						<rect
+							class="monitor__pet-area"
+							x={petArea.x}
+							y={petArea.y}
+							width={petArea.width}
+							height={petArea.height}
+							aria-hidden="true"
+						/>
+					)
+				}
+
+				<!--
+					The individual pixel cells are decorative because
+					the complete image is already described by the SVG's
+					title and description.
+				-->
+				<g aria-hidden="true">
+					{
+						groundShadowCells.map(
+							([x, y]) => (
+								<rect
+									class="monitor__ground-shadow-cell"
+									x={x}
+									y={y}
+									width="1"
+									height="1"
+								/>
+							),
+						)
+					}
+				</g>
+
+				<g aria-hidden="true">
+					{
+						eggCells.map((cell) => (
+							<rect
+								class:list={[
+									"monitor__egg-cell",
+									`monitor__egg-cell--${cell.tone}`,
+								]}
+								x={cell.x}
+								y={cell.y}
+								width="1"
+								height="1"
+							/>
+						))
+					}
+				</g>
+			</svg>
+		</div>
+	</div>
+</section>

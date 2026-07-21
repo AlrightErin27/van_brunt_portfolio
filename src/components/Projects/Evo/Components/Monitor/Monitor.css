@@ -1,0 +1,285 @@
+/* =========================================================
+   MONITOR
+   ========================================================= */
+
+.monitor {
+	--monitor-screen-background: #070b09;
+	--monitor-grid-color: rgb(215 255 63 / 11%);
+
+	--monitor-egg-outline: #5d6557;
+	--monitor-egg-shell: var(--color-text);
+	--monitor-egg-shadow: #b9b7ae;
+	--monitor-egg-highlight: #fffdf8;
+	--monitor-egg-marking: var(--color-accent);
+
+	width: 100%;
+
+	border:
+		var(--border-width)
+		solid
+		var(--color-border);
+
+	background-color:
+		var(--color-surface-elevated);
+}
+
+
+/* =========================================================
+   MONITOR HEADER
+   ========================================================= */
+
+.monitor__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-4);
+
+	padding:
+		var(--space-3)
+		var(--space-4);
+
+	border-block-end:
+		var(--border-width)
+		solid
+		var(--color-border);
+}
+
+.monitor__title {
+	margin: 0;
+
+	color: var(--color-text);
+
+	font-size: var(--text-xs);
+	font-weight: var(--weight-semibold);
+	line-height: 1.4;
+
+	letter-spacing: var(--tracking-wider);
+	text-transform: uppercase;
+}
+
+.monitor__meta {
+	margin: 0;
+
+	color: var(--color-text-muted);
+
+	font-family:
+		ui-monospace,
+		SFMono-Regular,
+		Menlo,
+		Monaco,
+		Consolas,
+		"Liberation Mono",
+		monospace;
+
+	font-size: var(--text-xs);
+	line-height: 1.4;
+}
+
+
+/* =========================================================
+   MONITOR HARDWARE
+   ========================================================= */
+
+.monitor__hardware {
+	padding: 0.75rem;
+
+	background-color:
+		var(--color-surface-elevated);
+}
+
+.monitor__screen {
+	position: relative;
+
+	width: 100%;
+	max-width: 56rem;
+	aspect-ratio: 5 / 3;
+
+	margin-inline: auto;
+
+	/*
+		This only clips decorative SVG content. It does not contain
+		readable HTML or interactive controls.
+	*/
+	overflow: hidden;
+
+	border:
+		var(--border-width)
+		solid
+		var(--color-border-strong);
+
+	background-color:
+		var(--monitor-screen-background);
+
+	box-shadow:
+		inset 0 0 0 0.25rem
+		rgb(0 0 0 / 22%),
+		inset 0 0 2rem
+		rgb(0 0 0 / 40%);
+}
+
+/*
+	A static glass-like vignette.
+
+	It does not move, flash, or communicate information.
+*/
+.monitor__screen::after {
+	content: "";
+
+	position: absolute;
+	inset: 0;
+
+	pointer-events: none;
+
+	background:
+		radial-gradient(
+			circle at center,
+			transparent 42%,
+			rgb(0 0 0 / 12%) 72%,
+			rgb(0 0 0 / 30%) 100%
+		);
+}
+
+
+/* =========================================================
+   SVG DISPLAY
+   ========================================================= */
+
+.monitor__display {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+}
+
+.monitor__grid-background {
+	fill:
+		var(--monitor-screen-background);
+}
+
+.monitor__grid-line {
+	fill: none;
+
+	stroke:
+		var(--monitor-grid-color);
+
+	stroke-width: 0.04;
+}
+
+.monitor__pet-area {
+	fill:
+		rgb(215 255 63 / 4%);
+
+	stroke:
+		var(--color-accent);
+
+	stroke-width: 0.08;
+	stroke-dasharray: 0.4 0.3;
+
+	vector-effect:
+		non-scaling-stroke;
+}
+
+
+/* =========================================================
+   EGG
+   ========================================================= */
+
+.monitor__egg-cell {
+	shape-rendering: crispEdges;
+}
+
+.monitor__egg-cell--outline {
+	fill:
+		var(--monitor-egg-outline);
+}
+
+.monitor__egg-cell--shell {
+	fill:
+		var(--monitor-egg-shell);
+}
+
+.monitor__egg-cell--shadow {
+	fill:
+		var(--monitor-egg-shadow);
+}
+
+.monitor__egg-cell--highlight {
+	fill:
+		var(--monitor-egg-highlight);
+}
+
+.monitor__egg-cell--marking {
+	fill:
+		var(--monitor-egg-marking);
+}
+
+.monitor__ground-shadow-cell {
+	fill:
+		var(--color-border);
+
+	opacity: 0.42;
+
+	shape-rendering: crispEdges;
+}
+
+
+/* =========================================================
+   TABLET AND MOBILE
+   ========================================================= */
+
+@media (max-width: 48rem) {
+	.monitor__header {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.monitor__hardware {
+		padding: 0.5rem;
+	}
+
+	.monitor__screen {
+		border-color:
+			var(--color-border);
+	}
+}
+
+
+/* =========================================================
+   WINDOWS HIGH CONTRAST
+   ========================================================= */
+
+@media (forced-colors: active) {
+	.monitor,
+	.monitor__header,
+	.monitor__screen {
+		border-color: CanvasText;
+	}
+
+	.monitor__screen::after {
+		display: none;
+	}
+
+	.monitor__grid-background {
+		fill: Canvas;
+	}
+
+	.monitor__grid-line {
+		stroke: GrayText;
+	}
+
+	.monitor__egg-cell--outline,
+	.monitor__egg-cell--shell,
+	.monitor__egg-cell--shadow,
+	.monitor__egg-cell--highlight {
+		fill: CanvasText;
+	}
+
+	.monitor__egg-cell--marking {
+		fill: Highlight;
+	}
+
+	.monitor__ground-shadow-cell {
+		fill: GrayText;
+	}
+}

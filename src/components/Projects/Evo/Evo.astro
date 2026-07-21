@@ -2,11 +2,22 @@
 import "./Evo.css";
 
 /*
-	Uncomment these imports after the components exist.
+	TODO: Import these components after their files exist.
 
 	import Monitor from "./Monitor.astro";
 	import Terminal from "./Terminal.astro";
 	import SidePanel from "./SidePanel.astro";
+
+	Evo.astro should remain responsible for:
+	- The page introduction
+	- The overall console layout
+	- The primary heading hierarchy
+
+	The imported components should manage their own:
+	- Internal markup
+	- Interactive behavior
+	- Component-specific accessibility
+	- Component-specific CSS
 */
 ---
 
@@ -39,7 +50,13 @@ import "./Evo.css";
 				</p>
 
 				<p class="evo__supporting-text">
-					Evo is an accessibility-first, session-based AI pet powered by Google Gemini. Through conversation, your answers shape its personality, behavior, and appearance—showcasing practical AI integration and accessible interaction design.
+					Evo is an accessibility-first,
+					session-based AI pet powered by Google
+					Gemini. Through conversation, your
+					answers shape its personality, behavior,
+					and appearance—showcasing practical AI
+					integration and accessible interaction
+					design.
 				</p>
 			</div>
 		</header>
@@ -54,28 +71,65 @@ import "./Evo.css";
 						Evo creature system
 					</p>
 
+					<!--
+						The section needs a real heading for screen-reader
+						navigation, even though the visual design does not
+						currently need another visible heading.
+					-->
 					<h2
 						id="evo-console-title"
-						class="evo-console__title"
+						class="evo-console__title visually-hidden"
 					>
-						<!-- monitor display -->
+						Evo creature console
 					</h2>
 				</div>
 
-				<p class="evo-console__status">
+				<!--
+					TODO: Update this text as the game state changes.
+
+					Suggested states:
+					- Ready
+					- Session active
+					- Thinking
+					- Updating creature
+					- Connection error
+
+					Keep status messages brief. Because this element uses
+					role="status", updates will be announced politely by
+					screen readers without interrupting other content.
+				-->
+				<p
+					class="evo-console__status"
+					role="status"
+					aria-live="polite"
+					aria-atomic="true"
+				>
 					<span
 						class="evo-console__status-indicator"
 						aria-hidden="true"
 					></span>
 
-					Live
+					Ready
 				</p>
 			</header>
 
 			<div class="evo-console__layout">
 				<div class="evo-console__primary">
 					<div class="evo-console__slot">
-						<!-- Replace this section with <Monitor /> -->
+						<!--
+							TODO: Replace this entire placeholder section
+							with the Monitor component:
+
+							<Monitor />
+
+							The completed Monitor component should:
+							- Render the 50 × 30 SVG grid
+							- Give the SVG role="img"
+							- Include an accessible title and description
+							- Update the description when the pet changes
+							- Avoid announcing purely decorative animation
+							- Respect prefers-reduced-motion
+						-->
 
 						<section
 							class="evo-placeholder evo-placeholder--monitor"
@@ -89,9 +143,7 @@ import "./Evo.css";
 									Evolution display
 								</h3>
 
-								<p class="evo-placeholder__meta">
-									50 × 30 grid
-								</p>
+					
 							</div>
 
 							<div class="evo-monitor-preview">
@@ -110,7 +162,23 @@ import "./Evo.css";
 					</div>
 
 					<div class="evo-console__slot">
-						<!-- Replace this section with <Terminal /> -->
+						<!--
+							TODO: Replace this entire placeholder section
+							with the Terminal component:
+
+							<Terminal />
+
+							The completed Terminal component should:
+							- Use a properly associated label for every field
+							- Keep instructions outside placeholder text
+							- Use a role="log" region for conversation history
+							- Announce new messages politely
+							- Preserve messages visually for review
+							- Move focus only when the user expects it
+							- Expose loading and error states in text
+							- Prevent duplicate submissions while Gemini responds
+							- Include an accessible name for the submit control
+						-->
 
 						<section
 							class="evo-placeholder evo-placeholder--terminal"
@@ -149,7 +217,22 @@ import "./Evo.css";
 				</div>
 
 				<div class="evo-console__slot evo-console__slot--side">
-					<!-- Replace this aside with <SidePanel /> -->
+					<!--
+						TODO: Replace this entire placeholder aside
+						with the SidePanel component:
+
+						<SidePanel />
+
+						The completed SidePanel component should:
+						- Keep Start over disabled until a session begins
+						- Keep How to play available before gameplay
+						- Keep Accessibility settings available before gameplay
+						- Confirm before erasing an active session
+						- Use native <dialog> elements for modal content
+						  when browser support and implementation allow
+						- Return focus to the control that opened a dialog
+						- Avoid using color alone to communicate a setting
+					-->
 
 					<aside
 						class="evo-placeholder evo-side-panel"
@@ -169,6 +252,10 @@ import "./Evo.css";
 						</div>
 
 						<div class="evo-side-panel__controls">
+							<!--
+								TODO: Enable only when there is an active
+								session to reset.
+							-->
 							<button
 								class="evo-control"
 								type="button"
@@ -186,6 +273,13 @@ import "./Evo.css";
 								</span>
 							</button>
 
+							<!--
+								TODO: This control should eventually remain
+								available before and during gameplay.
+
+								If it opens a dialog, the dialog should have
+								a visible heading and a clear Close button.
+							-->
 							<button
 								class="evo-control"
 								type="button"
@@ -203,6 +297,16 @@ import "./Evo.css";
 								</span>
 							</button>
 
+							<!--
+								TODO: This control should eventually remain
+								available before and during gameplay.
+
+								Potential settings may include:
+								- Reduced or no animation
+								- Simplified visual effects
+								- Terminal announcement preferences
+								- Alternate pet descriptions
+							-->
 							<button
 								class="evo-control"
 								type="button"
@@ -222,7 +326,9 @@ import "./Evo.css";
 						</div>
 
 						<p class="evo-side-panel__note">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam est sapien, pulvinar vel sem eu, consectetur porta diam. Nunc sit amet mauris scelerisque, gravida nibh sit amet, dignissim tellus.
+							Game controls will become available
+							as the interactive systems are
+							connected.
 						</p>
 					</aside>
 				</div>

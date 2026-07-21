@@ -3,21 +3,521 @@ import "./Resume.css";
 ---
 
 <main id="main-content" class="resume-page" tabindex="-1">
-	<section
-		class="resume-page__intro"
-		aria-labelledby="resume-heading"
-	>
-		<p class="resume-page__eyebrow">
-			Digital Accessibility Specialist
-		</p>
+	<article class="resume">
+		<header class="resume__header">
+			<div class="resume__identity">
+				<p class="resume__eyebrow">
+					Resume
+				</p>
 
-		<h1 id="resume-heading" class="resume-page__title">
-			Resume
-		</h1>
+				<h1 class="resume__name">
+					Erin Van Brunt
+				</h1>
 
-		<p class="resume-page__description">
-			My professional experience, accessibility work, education,
-			and technical background.
-		</p>
-	</section>
+				<p class="resume__title">
+					Accessibility QA Tester
+					<span aria-hidden="true"> | </span>
+					Digital Accessibility Specialist
+				</p>
+			</div>
+
+			<address class="resume-contact">
+				<p class="resume-contact__location">
+					Santa Cruz, California
+				</p>
+
+				<nav
+					class="resume-contact__navigation"
+					aria-label="Resume contact links"
+				>
+					<ul class="resume-contact__list">
+						<li>
+							<a href="mailto:erinmontybruce@gmail.com">
+								ErinMontyBruce@gmail.com
+							</a>
+						</li>
+
+						<li>
+							<a href="https://www.linkedin.com/in/erin-van-brunt/">
+								LinkedIn
+							</a>
+						</li>
+
+						<li>
+							<a href="https://github.com/AlrightErin27">
+								GitHub
+							</a>
+						</li>
+
+						<li>
+							<a href="https://van-brunt-portfolio.vercel.app">
+								Portfolio
+							</a>
+						</li>
+
+						<li>
+							<a href="https://medium.com/@erinmontybruce">
+								Medium Blog
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</address>
+		</header>
+
+		<section
+			class="resume-section resume-section--summary"
+			aria-labelledby="summary-heading"
+		>
+			<div class="resume-section__heading">
+				<p class="resume-section__number" aria-hidden="true">
+					01
+				</p>
+
+				<h2 id="summary-heading">
+					Professional Summary
+				</h2>
+			</div>
+
+			<div class="resume-section__content">
+				<p class="resume-summary">
+					Accessibility-focused QA professional with a background in
+					full-stack software engineering and hands-on experience
+					testing, debugging, and improving complex web applications.
+					Brings WCAG-based accessibility training, strong technical
+					documentation skills, and a specialization in accessibility
+					QA and digital accessibility testing.
+				</p>
+			</div>
+		</section>
+
+		<section
+			class="resume-section"
+			aria-labelledby="skills-heading"
+		>
+			<div class="resume-section__heading">
+				<p class="resume-section__number" aria-hidden="true">
+					02
+				</p>
+
+				<h2 id="skills-heading">
+					Core Skills
+				</h2>
+			</div>
+
+			<div class="resume-section__content">
+				<dl class="resume-skills">
+					<div class="resume-skills__group">
+						<dt>
+							Accessibility &amp; Inclusive Design
+						</dt>
+
+						<dd>
+							WCAG principles, manual accessibility evaluation,
+							keyboard testing, screen reader testing foundations,
+							semantic HTML, accessible forms, focus management,
+							color contrast, responsive and zoom accessibility,
+							and ARIA fundamentals
+						</dd>
+					</div>
+
+					<div class="resume-skills__group">
+						<dt>
+							QA &amp; Testing
+						</dt>
+
+						<dd>
+							Functional and regression testing, defect identification
+							and documentation, cross-browser testing, test
+							automation, Vitest, React Testing Library, Chrome
+							DevTools, Postman, and CI/CD quality checks
+						</dd>
+					</div>
+
+					<div class="resume-skills__group">
+						<dt>
+							Technical Foundations
+						</dt>
+
+						<dd>
+							HTML, CSS, JavaScript, React, REST APIs, Git and
+							GitHub, responsive web development, developer
+							collaboration, and technical documentation
+						</dd>
+					</div>
+				</dl>
+			</div>
+		</section>
+
+		<section
+			class="resume-section"
+			aria-labelledby="experience-heading"
+		>
+			<div class="resume-section__heading">
+				<p class="resume-section__number" aria-hidden="true">
+					03
+				</p>
+
+				<h2 id="experience-heading">
+					Experience
+				</h2>
+			</div>
+
+			<div class="resume-section__content resume-experience">
+				<article class="resume-entry">
+					<header class="resume-entry__header">
+						<div>
+							<h3>
+								Software Engineering Intern
+								<span class="resume-entry__company">
+									at Aeyesafe
+								</span>
+							</h3>
+						</div>
+
+						<p class="resume-entry__meta">
+							<time datetime="2025-06">
+								June 2025
+							</time>
+							<span aria-hidden="true">–</span>
+							<time datetime="2025-09">
+								September 2025
+							</time>
+						</p>
+					</header>
+
+					<ul class="resume-entry__details">
+						<li>
+							Implemented the frontend testing foundation with
+							Vitest and jsdom, creating routing and rendering
+							tests and mocks for browser APIs and application
+							providers.
+						</li>
+
+						<li>
+							Integrated automated tests into Husky pre-commit hooks
+							and Bitbucket Pipelines, confirming that failing tests
+							blocked commits before code review and merge.
+						</li>
+
+						<li>
+							Audited more than 100 files, identified and safely
+							removed dead code, consolidated the application’s
+							icons into Phosphor, and removed redundant
+							third-party packages.
+						</li>
+
+						<li>
+							Created a global CSS system, standardized large
+							portions of inconsistent legacy styling, and built
+							API-connected dashboard tables with pagination.
+						</li>
+					</ul>
+				</article>
+
+				<article class="resume-entry">
+					<header class="resume-entry__header">
+						<div>
+							<h3>
+								Software Engineering Intern
+								<span class="resume-entry__company">
+									at Digital Factory
+								</span>
+							</h3>
+						</div>
+
+						<p class="resume-entry__meta">
+							<time datetime="2025-01">
+								January 2025
+							</time>
+							<span aria-hidden="true">–</span>
+							<time datetime="2025-06">
+								June 2025
+							</time>
+						</p>
+					</header>
+
+					<ul class="resume-entry__details">
+						<li>
+							Built the functional foundation of a new internal
+							admin portal using Next.js, Appwrite, and Flask,
+							including registration, login, logout, session
+							persistence, protected routes, token handling, and
+							error states.
+						</li>
+
+						<li>
+							Connected the portal first to mock account data and
+							then to the Zeus backend, establishing a working
+							frontend-to-backend integration.
+						</li>
+
+						<li>
+							Reconstructed and documented a complex local backend
+							environment using Docker, Flask, PostgreSQL, MongoDB,
+							Redis, Pipenv, and multiple microservices.
+						</li>
+
+						<li>
+							Investigated a deeply outdated legacy website,
+							identified major integration and maintenance risks,
+							and contributed to a proposal recommending a full
+							rebuild rather than continued patching.
+						</li>
+					</ul>
+				</article>
+
+				<article class="resume-entry">
+					<header class="resume-entry__header">
+						<div>
+							<h3>
+								Layout Engineer
+								<span class="resume-entry__company">
+									at Analog Devices
+								</span>
+							</h3>
+						</div>
+
+						<div class="resume-entry__meta">
+							<p>
+								<time datetime="2011">
+									2011
+								</time>
+								<span aria-hidden="true">–</span>
+								<time datetime="2014">
+									2014
+								</time>
+							</p>
+
+							<p>
+								San Jose, California
+							</p>
+						</div>
+					</header>
+
+					<ul class="resume-entry__details">
+						<li>
+							Created and optimized more than 50 analog and digital
+							IC layouts using Cadence Virtuoso.
+						</li>
+
+						<li>
+							Performed DRC and LVS verification to identify layout
+							errors, support design-rule compliance, and improve
+							overall accuracy.
+						</li>
+					</ul>
+				</article>
+
+				<article class="resume-entry">
+					<header class="resume-entry__header">
+						<div>
+							<h3>
+								Restaurant Manager
+							</h3>
+						</div>
+
+						<div class="resume-entry__meta">
+							<p>
+								<time datetime="2014">
+									2014
+								</time>
+								<span aria-hidden="true">–</span>
+								<time datetime="2025">
+									2025
+								</time>
+							</p>
+
+							<p>
+								Pacific Northwest &amp; Southwest U.S.
+							</p>
+						</div>
+					</header>
+
+					<ul class="resume-entry__details">
+						<li>
+							Led and trained teams of more than 15 employees while
+							managing scheduling, staffing, inventory, bookkeeping,
+							and daily operations.
+						</li>
+
+						<li>
+							Improved workflows and team performance, contributing
+							to a 20% increase in sales while maintaining health
+							and safety compliance.
+						</li>
+					</ul>
+				</article>
+			</div>
+		</section>
+
+		<section
+			class="resume-section"
+			aria-labelledby="education-heading"
+		>
+			<div class="resume-section__heading">
+				<p class="resume-section__number" aria-hidden="true">
+					04
+				</p>
+
+				<h2 id="education-heading">
+					Education &amp; Certifications
+				</h2>
+			</div>
+
+			<div class="resume-section__content">
+				<ul class="resume-education">
+					<li>
+						<div>
+							<h3>
+								University of Washington
+							</h3>
+
+							<p>
+								Web &amp; Digital Accessibility
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2026-07">
+								July 2026
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								Deque University
+							</h3>
+
+							<p>
+								Web Accessibility Specialist (WAS) Preparation,
+								Certificate of Completion
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2026">
+								2026
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								Deque University
+							</h3>
+
+							<p>
+								CPACC Preparation, in progress
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							Exam scheduled
+							<time datetime="2026-09">
+								<br / >September 2026
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								Western Governors University
+							</h3>
+
+							<p>
+								Python Course
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2025">
+								2025
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								Arizona State University
+							</h3>
+
+							<p>
+								Principles of Programming with Java
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2023">
+								2023
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								Flatiron School
+							</h3>
+
+							<p>
+								Full-Stack Software Engineering Certificate
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2022">
+								2022
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								General Assembly
+							</h3>
+
+							<p>
+								Software Engineering Immersive Certificate
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2021">
+								2021
+							</time>
+						</p>
+					</li>
+
+					<li>
+						<div>
+							<h3>
+								Silicon Design Institute
+							</h3>
+
+							<p>
+								Mask Design / Layout Engineering
+							</p>
+						</div>
+
+						<p class="resume-education__date">
+							<time datetime="2011">
+								2011
+							</time>
+							<span aria-hidden="true">–</span>
+							<time datetime="2013">
+								2013
+							</time>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</article>
 </main>

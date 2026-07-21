@@ -1,69 +1,89 @@
 ---
+import resumePDF from "../../assets/Resume_Erin_Van_Brunt.pdf"
+import { DownloadSimple } from "@phosphor-icons/react";
 import "./Resume.css";
 ---
 
 <main id="main-content" class="resume-page" tabindex="-1">
 	<article class="resume">
-		<header class="resume__header">
-			<div class="resume__identity">
-				<p class="resume__eyebrow">
-					Resume
-				</p>
+        <header class="resume__header">
+            <div class="resume__identity">
+                <p class="resume__eyebrow">
+                    Resume
+                </p>
 
-				<h1 class="resume__name">
-					Erin Van Brunt
-				</h1>
+                <h1 class="resume__name">
+                    Erin Van Brunt
+                </h1>
 
-				<p class="resume__title">
-					Accessibility QA Tester
-					<span aria-hidden="true"> | </span>
-					Digital Accessibility Specialist
-				</p>
-			</div>
+                <p class="resume__title">
+                    Accessibility QA Tester
+                    <span aria-hidden="true"> | </span>
+                    Digital Accessibility Specialist
+                </p>
+            </div>
 
-			<address class="resume-contact">
-				<p class="resume-contact__location">
-					Santa Cruz, California
-				</p>
+            <div class="resume__header-details">
+                <address class="resume-contact">
+                    <p class="resume-contact__location">
+                        Santa Cruz, California
+                    </p>
 
-				<nav
-					class="resume-contact__navigation"
-					aria-label="Resume contact links"
-				>
-					<ul class="resume-contact__list">
-						<li>
-							<a href="mailto:erinmontybruce@gmail.com">
-								ErinMontyBruce@gmail.com
-							</a>
-						</li>
+                    <nav
+                        class="resume-contact__navigation"
+                        aria-label="Resume contact links"
+                    >
+                        <ul class="resume-contact__list">
+                            <li>
+                                <a href="mailto:erinmontybruce@gmail.com">
+                                    ErinMontyBruce@gmail.com
+                                </a>
+                            </li>
 
-						<li>
-							<a href="https://www.linkedin.com/in/erin-van-brunt/">
-								LinkedIn
-							</a>
-						</li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/erin-van-brunt/">
+                                    LinkedIn
+                                </a>
+                            </li>
 
-						<li>
-							<a href="https://github.com/AlrightErin27">
-								GitHub
-							</a>
-						</li>
+                            <li>
+                                <a href="https://github.com/AlrightErin27">
+                                    GitHub
+                                </a>
+                            </li>
 
-						<li>
-							<a href="https://van-brunt-portfolio.vercel.app">
-								Portfolio
-							</a>
-						</li>
+                            <li>
+                                <a href="https://van-brunt-portfolio.vercel.app">
+                                    Portfolio
+                                </a>
+                            </li>
 
-						<li>
-							<a href="https://medium.com/@erinmontybruce">
-								Medium Blog
-							</a>
-						</li>
-					</ul>
-				</nav>
-			</address>
-		</header>
+                            <li>
+                                <a href="https://medium.com/@erinmontybruce">
+                                    Medium Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </address>
+
+                <a
+                    class="resume-download"
+                    href={resumePDF}
+                    download="Resume_Erin_Van_Brunt.pdf"
+                >
+                    <span>Download PDF resume</span>
+
+                    <DownloadSimple
+                        className="resume-download__icon"
+                        size={20}
+                        weight="bold"
+                        aria-hidden={true}
+                        focusable={false}
+                    />
+                </a>
+            </div>
+        </header>
 
 		<section
 			class="resume-section resume-section--summary"

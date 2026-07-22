@@ -104,20 +104,16 @@ const petArea = {
 	- The final occupied x coordinate
 */
 const eggRows = [
-	{ y: 3, start: 8, end: 11 },
-	{ y: 4, start: 6, end: 13 },
-	{ y: 5, start: 5, end: 14 },
-	{ y: 6, start: 4, end: 15 },
-	{ y: 7, start: 4, end: 15 },
-	{ y: 8, start: 3, end: 16 },
-	{ y: 9, start: 3, end: 16 },
-	{ y: 10, start: 3, end: 16 },
-	{ y: 11, start: 3, end: 16 },
-	{ y: 12, start: 4, end: 15 },
-	{ y: 13, start: 4, end: 15 },
-	{ y: 14, start: 5, end: 14 },
-	{ y: 15, start: 6, end: 13 },
-	{ y: 16, start: 8, end: 11 },
+	{ y: 5, start: 8, end: 11 },
+	{ y: 6, start: 7, end: 12 },
+	{ y: 7, start: 6, end: 13 },
+	{ y: 8, start: 5, end: 14 },
+	{ y: 9, start: 5, end: 14 },
+	{ y: 10, start: 5, end: 14 },
+	{ y: 11, start: 5, end: 14 },
+	{ y: 12, start: 6, end: 13 },
+	{ y: 13, start: 7, end: 12 },
+	{ y: 14, start: 8, end: 11 },
 ] as const;
 
 const localEggCells: Cell[] =
@@ -141,11 +137,10 @@ const eggCellKeys = new Set(
 	Small highlights on the upper-left portion of the shell.
 */
 const highlightCells = [
-	[6, 6],
-	[6, 7],
-	[5, 8],
-	[6, 8],
-	[5, 9],
+	[7, 7],
+	[7, 8],
+	[6, 9],
+	[7, 9],
 ] satisfies readonly Cell[];
 
 const highlightKeys = new Set(
@@ -159,13 +154,12 @@ const highlightKeys = new Set(
 	A chartreuse crack that hints the egg is ready to hatch.
 */
 const markingCells = [
-	[9, 7],
-	[10, 7],
+	[9, 8],
 	[10, 8],
-	[11, 8],
 	[10, 9],
+	[11, 9],
 	[10, 10],
-	[9, 10],
+	[10, 11],
 	[9, 11],
 ] satisfies readonly Cell[];
 
@@ -247,22 +241,20 @@ const eggCells: EggCell[] =
 	The shadow also uses local pet coordinates.
 */
 const localGroundShadowCells: Cell[] = [
-	[7, 17],
-	[8, 17],
-	[9, 17],
-	[10, 17],
-	[11, 17],
-	[12, 17],
-	[5, 18],
-	[6, 18],
-	[7, 18],
-	[8, 18],
-	[9, 18],
-	[10, 18],
-	[11, 18],
-	[12, 18],
-	[13, 18],
-	[14, 18],
+	[7, 15],
+	[8, 15],
+	[9, 15],
+	[10, 15],
+	[11, 15],
+	[12, 15],
+	[6, 16],
+	[7, 16],
+	[8, 16],
+	[9, 16],
+	[10, 16],
+	[11, 16],
+	[12, 16],
+	[13, 16],
 ];
 
 const groundShadowCells =
@@ -290,9 +282,9 @@ const imageDescription =
 		</h3>
 
 		<p class="monitor__meta">
-			<span aria-hidden="true">
+			<!-- <span aria-hidden="true">
 				50 × 30 grid
-			</span>
+			</span> -->
 
 			<span class="visually-hidden">
 				Grid size: 50 columns by 30 rows.

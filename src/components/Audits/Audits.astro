@@ -6,33 +6,29 @@ type Audit = {
     label: string;
     description: string;
     href: string;
-    status: "available" | "coming-soon";
 };
 
 const audits: Audit[] = [
     {
         title: "First Audit",
-        label: "consectetur adipiscing elit",
+        label: "E-commerce Audit",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget lacus vitae neque maximus pellentesque. Nam commodo ut orci nec lacinia. Maecenas blandit tempor eleifend. Nullam hendrerit nibh et velit vestibulum pulvinar.",
-        href: "/audits/1",
-        status: "coming-soon",
+            "A small local e-commerce site. This gives you real interactive UI to test: navigation, product cards, images/alt text, filters, forms, cart controls, error handling, focus states, and possibly checkout. Ideally pick an independent local business using Shopify, Squarespace, WooCommerce, etc.—not Amazon or a giant retailer. Audit a representative flow rather than the entire site: homepage → category/product → cart → checkout up to the point of purchase.",
+        href: "/audits/e-commerce",
     },
     {
         title: "Second Audit",
-        label: "consectetur adipiscing elit",
+        label: "Public-sector",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget lacus vitae neque maximus pellentesque. Nam commodo ut orci nec lacinia. Maecenas blandit tempor eleifend. Nullam hendrerit nibh et velit vestibulum pulvinar.",
-        href: "/audits/2",
-        status: "coming-soon",
+            "A local public-sector or library site. I really like the library idea. It gives the portfolio a different purpose: access to civic/community information rather than buying something. You can examine navigation, search, events, forms, headings, links, PDFs, third-party widgets, and potentially multilingual or public-resource content. A city department, public library, parks department, or small county service site could all work well. I’d avoid an enormous federal site; something smaller lets you actually tell a coherent story.",
+        href: "/audits/public-sector",
     },
     {
         title: "Third Audit",
-        label: "consectetur adipiscing elit",
+        label: "Evb-portfolio",
         description:
-            "Etiam condimentum, nisl id pellentesque sollicitudin, justo justo facilisis est, tempor aliquet sem nulla sit amet sem. Nullam congue, turpis eget auctor tempus, diam dui pretium dui, at scelerisque dolor nisi ultrices lorem.",
-        href: "/audits/3",
-        status: "coming-soon",
+            "Your own portfolio. This should probably be the deepest case study because you can go beyond identifying issues. You can show audit → remediation → retest. That demonstrates QA, frontend knowledge, documentation, and accessibility implementation all at once. This one can become the proof that you don’t just know how to find problems—you know how to fix and verify them.",
+        href: "/audits/evb-portfolio",
     },
 ];
 ---
@@ -51,9 +47,10 @@ const audits: Audit[] = [
                     Audits
                 </p>
 
-                <h1 class="audits-page__title">
-                    Pellentesque eget.
-                </h1>
+                    <h1 class="audits-page__title">
+                         <span class="visually-hidden">Accessibility audits: </span>
+                              Accessibility, examined.
+                    </h1>
             </div>
 
             <div class="audits-page__summary">
@@ -64,14 +61,11 @@ const audits: Audit[] = [
                 ></div>
 
                 <p>
-                    Pellentesque eget lacus vitae neque maximus pellentesque.
-                    Nam commodo ut orci nec lacinia. Maecenas blandit tempor
-                    eleifend.
+                    These audits evaluate digital experiences through the lens of universal design, inclusive usability, and WCAG 2.2 Level AA. Each review combines manual testing, assistive technology, and automated tools to identify barriers that can affect people with disabilities.
                 </p>
 
                 <p>
-                    Nullam hendrerit nibh et velit vestibulum pulvinar.
-                    Pellentesque egllentesque.
+                    The goal is not just to flag issues, but to understand their impact, document them clearly, and recommend practical remediation that supports more usable, resilient experiences for everyone.
                 </p>
 
             </div>
@@ -142,26 +136,6 @@ const audits: Audit[] = [
 
                                             <div class="audit-card__action">
 
-                                                <p
-                                                    class:list={[
-                                                        audit.status === "available"
-                                                            ? "audit-card__cta"
-                                                            : "audit-card__coming-soon",
-                                                    ]}
-                                                    aria-hidden="true"
-                                                >
-                                                    <span>
-                                                        {
-                                                            audit.status === "available"
-                                                                ? "View audit"
-                                                                : "Audit coming soon"
-                                                        }
-                                                    </span>
-
-                                                    <span class="audit-card__arrow">
-                                                        →
-                                                    </span>
-                                                </p>
 
                                             </div>
 

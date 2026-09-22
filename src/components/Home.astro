@@ -2,50 +2,76 @@
 import { Image } from "astro:assets";
 
 import heroImage from "../assets/thomas-charters.jpg";
+
 import "./Home.css";
 ---
 
 <main id="main-content" class="home" tabindex="-1">
-	<section class="hero" aria-labelledby="hero-heading">
-		<div class="hero__media">
-			<Image
-			src={heroImage}
-			alt=""
-			class="hero__image"
-			priority
-			layout="full-width"
-			sizes="(max-width: 48rem) 100vw, 62vw"
-			/>
-		</div>
 
-		<div class="hero__overlay"></div>
+    <section class="hero" aria-labelledby="hero-heading">
 
-		<div class="hero__content">
-			<p class="hero__eyebrow">
-				Digital Accessibility Specialist
-			</p>
+        <div class="hero__media">
 
-			<h1 id="hero-heading" class="hero__title">
-				<span>Accessibility,</span>
-				<span>designed</span>
-				<span>with intention.</span>
-			</h1>
+            <Image
+                src={heroImage}
+                alt=""
+                class="hero__image"
+                priority
+                layout="full-width"
+                sizes="(max-width: 48rem) 100vw, 62vw"
+            />
 
-			<div class="hero__rule" aria-hidden="true"></div>
+        </div>
 
-			<p class="hero__description">
-					I’m a digital accessibility specialist with a software engineering
-					background and a strong eye for design. I believe digital experiences
-					can be beautiful, intuitive, and genuinely usable for everyone.
-			</p>
+        <div class="hero__overlay"></div>
 
-			<a class="hero__cta" href="/resume">
-				<span>View my resume</span>
+        <div class="hero__content">
 
-				<span class="hero__cta-arrow" aria-hidden="true">
-					→
-				</span>
-			</a>
-		</div>
-	</section>
+            <p class="hero__eyebrow">
+                Digital Accessibility Specialist
+            </p>
+
+            <h1 id="hero-heading" class="hero__title">
+
+                <span class="visually-hidden">
+                    Erin Van Brunt, Digital Accessibility Specialist:
+                </span>
+
+                <span>Accessibility,</span>
+
+                <span>designed</span>
+
+                <span>with intention.</span>
+
+            </h1>
+
+            <div
+                class="hero__rule"
+                aria-hidden="true"
+            ></div>
+
+            <p class="hero__description">
+                I’m a digital accessibility specialist with a software
+                engineering background and a strong eye for design. I believe
+                digital experiences can be beautiful, intuitive, and genuinely
+                usable for everyone.
+            </p>
+
+            <a class="hero__cta" href="/resume">
+
+                <span>View my resume</span>
+
+                <span
+                    class="hero__cta-arrow"
+                    aria-hidden="true"
+                >
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
 </main>

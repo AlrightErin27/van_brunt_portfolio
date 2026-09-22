@@ -1,23 +1,69 @@
 ---
 import "../styles/style.css";
+
+/**
+ * Pages can pass in their own title.
+ * If they don't, the portfolio title is used.
+ */
+type Props = {
+    title?: string;
+};
+
+const {
+    title = "Erin Van Brunt's Accessibility Portfolio",
+} = Astro.props;
 ---
 
 <!doctype html>
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
-		<link rel="icon" href="/favicon.png" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Erin Van Brunt's Portfolio</title>
-	</head>
 
-	<body>
-		<a class="skip-link" href="#main-content">
-			Skip to main content
-		</a>
+    <head>
 
-		<slot />
-	</body>
+        <!-- Basic page setup -->
+        <meta charset="utf-8" />
+
+        <meta
+            name="viewport"
+            content="width=device-width"
+        />
+
+        <!-- Site favicon -->
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/favicon.png"
+        />
+
+        <link
+            rel="icon"
+            href="/favicon.png"
+        />
+
+        <!-- Astro metadata -->
+        <meta
+            name="generator"
+            content={Astro.generator}
+        />
+
+        <!-- Page-specific title -->
+        <title>{title}</title>
+
+    </head>
+
+    <body>
+
+        <!-- Lets keyboard users skip repeated navigation -->
+        <a
+            class="skip-link"
+            href="#main-content"
+        >
+            Skip to main content
+        </a>
+
+        <!-- Page content -->
+        <slot />
+
+    </body>
+
 </html>

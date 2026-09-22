@@ -28,86 +28,66 @@ const audits: Audit[] = [
         label: "Evb-portfolio",
         description:
             "Your own portfolio. This should probably be the deepest case study because you can go beyond identifying issues. You can show audit → remediation → retest. That demonstrates QA, frontend knowledge, documentation, and accessibility implementation all at once. This one can become the proof that you don’t just know how to find problems—you know how to fix and verify them.",
-        href: "/audits/evb-portfolio",
+        href: "/audits/portfolio",
     },
 ];
 ---
 
-<main
-    id="main-content"
-    tabindex="-1"
-    class="audits-page"
->
+<main id="main-content" tabindex="-1" class="audits-page">
     <div class="audits-page__inner">
-
         <header class="audits-page__intro">
-
             <div>
-                <p class="audits-page__eyebrow">
-                    Audits
-                </p>
+                <p class="audits-page__eyebrow">Audits</p>
 
-                    <h1 class="audits-page__title">
-                         <span class="visually-hidden">Accessibility audits: </span>
-                              Accessibility, examined.
-                    </h1>
+                <h1 class="audits-page__title">
+                    <span class="visually-hidden">Accessibility audits: </span>
+                    Accessibility, examined.
+                </h1>
             </div>
 
             <div class="audits-page__summary">
-
-                <div
-                    class="audits-page__accent-line"
-                    aria-hidden="true"
-                ></div>
+                <div class="audits-page__accent-line" aria-hidden="true"></div>
 
                 <p>
-                    These audits evaluate digital experiences through the lens of universal design, inclusive usability, and WCAG 2.2 Level AA. Each review combines manual testing, assistive technology, and automated tools to identify barriers that can affect people with disabilities.
+                    These audits evaluate digital experiences through the lens
+                    of universal design, inclusive usability, and WCAG 2.2 Level
+                    AA. Each review combines manual testing, assistive
+                    technology, and automated tools to identify barriers that
+                    can affect people with disabilities.
                 </p>
 
                 <p>
-                    The goal is not just to flag issues, but to understand their impact, document them clearly, and recommend practical remediation that supports more usable, resilient experiences for everyone.
+                    The goal is not just to flag issues, but to understand their
+                    impact, document them clearly, and recommend practical
+                    remediation that supports more usable, resilient experiences
+                    for everyone.
                 </p>
-
             </div>
-
         </header>
 
-        <section
-            class="audits-collection"
-            aria-labelledby="audit-list-title"
-        >
-
+        <section class="audits-collection" aria-labelledby="audit-list-title">
             <div class="audits-collection__heading">
-                <h2 id="audit-list-title">
-                    Selected audits
-                </h2>
+                <h2 id="audit-list-title">Selected audits</h2>
             </div>
 
             <ul class="audits-grid">
-
                 {
                     audits.map((audit, index) => {
-                        const auditNumber = String(index + 1).padStart(
-                            2,
-                            "0"
-                        );
+                        const auditNumber = String(index + 1).padStart(2, "0");
 
                         const titleId = `audit-${index + 1}-title`;
 
                         return (
                             <li class="audit-card">
-
                                 <article
                                     class="audit-card__article"
                                     aria-labelledby={titleId}
                                 >
-
                                     <a
                                         class="audit-card__surface audit-card__surface--link"
                                         href={audit.href}
                                         aria-label={`View audit: ${audit.title}`}
                                     >
-
                                         <div
                                             class="audit-card__visual"
                                             aria-hidden="true"
@@ -118,7 +98,6 @@ const audits: Audit[] = [
                                         </div>
 
                                         <div class="audit-card__body">
-
                                             <p class="audit-card__label">
                                                 {audit.label}
                                             </p>
@@ -134,25 +113,15 @@ const audits: Audit[] = [
                                                 {audit.description}
                                             </p>
 
-                                            <div class="audit-card__action">
-
-
-                                            </div>
-
+                                            <div class="audit-card__action" />
                                         </div>
-
                                     </a>
-
                                 </article>
-
                             </li>
                         );
                     })
                 }
-
             </ul>
-
         </section>
-
     </div>
 </main>

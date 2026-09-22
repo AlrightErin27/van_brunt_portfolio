@@ -52,7 +52,7 @@ const audits: Audit[] = [
                 </p>
 
                 <h1 class="audits-page__title">
-                    Pellentesque.
+                    Pellentesque eget.
                 </h1>
             </div>
 
@@ -71,7 +71,7 @@ const audits: Audit[] = [
 
                 <p>
                     Nullam hendrerit nibh et velit vestibulum pulvinar.
-                    Pellentesque eget lacus vitae neque maximus pellentesque.
+                    Pellentesque egllentesque.
                 </p>
 
             </div>
@@ -100,63 +100,6 @@ const audits: Audit[] = [
 
                         const titleId = `audit-${index + 1}-title`;
 
-                        const cardContent = (
-                            <>
-                                <div
-                                    class="audit-card__visual"
-                                    aria-hidden="true"
-                                >
-                                    <span class="audit-card__number">
-                                        {auditNumber}
-                                    </span>
-                                </div>
-
-                                <div class="audit-card__body">
-
-                                    <p class="audit-card__label">
-                                        {audit.label}
-                                    </p>
-
-                                    <h3
-                                        id={titleId}
-                                        class="audit-card__title"
-                                    >
-                                        {audit.title}
-                                    </h3>
-
-                                    <p class="audit-card__description">
-                                        {audit.description}
-                                    </p>
-
-                                    <div class="audit-card__action">
-
-                                        {
-                                            audit.status === "available" ? (
-                                                <p
-                                                    class="audit-card__cta"
-                                                    aria-hidden="true"
-                                                >
-                                                    <span>
-                                                        View audit
-                                                    </span>
-
-                                                    <span class="audit-card__arrow">
-                                                        →
-                                                    </span>
-                                                </p>
-                                            ) : (
-                                                <p class="audit-card__coming-soon">
-                                                    Audit coming soon
-                                                </p>
-                                            )
-                                        }
-
-                                    </div>
-
-                                </div>
-                            </>
-                        );
-
                         return (
                             <li class="audit-card">
 
@@ -165,21 +108,66 @@ const audits: Audit[] = [
                                     aria-labelledby={titleId}
                                 >
 
-                                    {
-                                        audit.status === "available" ? (
-                                            <a
-                                                class="audit-card__surface audit-card__surface--link"
-                                                href={audit.href}
-                                                aria-label={`View audit: ${audit.title}`}
+                                    <a
+                                        class="audit-card__surface audit-card__surface--link"
+                                        href={audit.href}
+                                        aria-label={`View audit: ${audit.title}`}
+                                    >
+
+                                        <div
+                                            class="audit-card__visual"
+                                            aria-hidden="true"
+                                        >
+                                            <span class="audit-card__number">
+                                                {auditNumber}
+                                            </span>
+                                        </div>
+
+                                        <div class="audit-card__body">
+
+                                            <p class="audit-card__label">
+                                                {audit.label}
+                                            </p>
+
+                                            <h3
+                                                id={titleId}
+                                                class="audit-card__title"
                                             >
-                                                {cardContent}
-                                            </a>
-                                        ) : (
-                                            <div class="audit-card__surface">
-                                                {cardContent}
+                                                {audit.title}
+                                            </h3>
+
+                                            <p class="audit-card__description">
+                                                {audit.description}
+                                            </p>
+
+                                            <div class="audit-card__action">
+
+                                                <p
+                                                    class:list={[
+                                                        audit.status === "available"
+                                                            ? "audit-card__cta"
+                                                            : "audit-card__coming-soon",
+                                                    ]}
+                                                    aria-hidden="true"
+                                                >
+                                                    <span>
+                                                        {
+                                                            audit.status === "available"
+                                                                ? "View audit"
+                                                                : "Audit coming soon"
+                                                        }
+                                                    </span>
+
+                                                    <span class="audit-card__arrow">
+                                                        →
+                                                    </span>
+                                                </p>
+
                                             </div>
-                                        )
-                                    }
+
+                                        </div>
+
+                                    </a>
 
                                 </article>
 

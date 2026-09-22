@@ -25,10 +25,6 @@ const navigation: NavigationItem[] = [
 		label: "Audits",
 		href: "/audits",
 	},
-	// {
-	// 	label: "Projects",
-	// 	href: "/projects",
-	// },
 	{
 		label: "Blog",
 		href: "https://medium.com/@erinmontybruce",
@@ -52,20 +48,11 @@ const isCurrentPage = (item: NavigationItem) => {
 <header class="site-header">
 	<nav class="navbar" aria-label="Primary navigation">
 		<a class="navbar__brand" href="/">
-			<Image
-				src={logo}
-				alt=""
-				class="navbar__logo"
-				width={96}
-			/>
+			<Image src={logo} alt="" class="navbar__logo" width={96} />
 
-			<span class="navbar__name">
-				Erin Van Brunt
-			</span>
+			<span class="navbar__name"> Erin Van Brunt </span>
 
-			<span class="visually-hidden">
-				, home
-			</span>
+			<span class="visually-hidden"> , home </span>
 		</a>
 
 		<ul class="navbar__links">
@@ -76,21 +63,14 @@ const isCurrentPage = (item: NavigationItem) => {
 							class="navbar__link"
 							href={item.href}
 							aria-current={
-								isCurrentPage(item)
-									? "page"
-									: undefined
+								isCurrentPage(item) ? "page" : undefined
 							}
 						>
 							<span>{item.label}</span>
 
-							{
-								item.external && (
-									<span class="visually-hidden">
-										{" "}
-										on Medium
-									</span>
-								)
-							}
+							{item.external && (
+								<span class="visually-hidden"> on Medium</span>
+							)}
 						</a>
 					</li>
 				))

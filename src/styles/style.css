@@ -1,6 +1,5 @@
 /* =========================================================
    GLOBAL DESIGN SYSTEM
-   Erin Van Brunt Portfolio
    ========================================================= */
 
 :root {
@@ -129,12 +128,9 @@
 
 	--content-max-width: 90rem;
 
-	/*
-	   Keeps long-form text comfortably below the
-	   80-character maximum referenced by WCAG AAA
-	   Visual Presentation.
-	*/
-	--text-max-width: 68ch;
+/* Keeps long-form text at a comfortable reading width
+   and helps support WCAG 1.4.8 line-length guidance. */
+--text-max-width: 68ch;
 
 	--page-padding: clamp(1.25rem, 4vw, 4rem);
 
@@ -176,34 +172,31 @@
 }
 
 html {
-	font-family: var(--font-primary);
-	background-color: var(--color-bg);
-	color: var(--color-text);
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
 
-	/* Respect the user's browser text-size preferences */
-	-webkit-text-size-adjust: 100%;
-	text-size-adjust: 100%;
+    /* Respect the user's browser text-size preferences */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
-	min-block-size: 100svh;
-	margin: 0;
-
-	display: grid;
-	grid-template-rows:
-		auto
-		1fr
-		auto;
-
-	background-color: var(--color-bg);
-	color: var(--color-text);
-
-	font-family: var(--font-primary);
-	font-size: var(--text-md);
-	font-weight: var(--weight-regular);
-	line-height: var(--line-height-body);
-
-	text-rendering: optimizeLegibility;
+    min-block-size: 100svh;
+    margin: 0;
+    display: grid;
+    grid-template-rows:
+        auto
+        1fr
+        auto;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-primary);
+    font-size: var(--text-md);
+    font-weight: var(--weight-regular);
+    line-height: var(--line-height-body);
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
 }
 
 
@@ -314,16 +307,29 @@ a:hover {
    to screen readers.
 */
 
+/* =========================================================
+   ACCESSIBILITY UTILITIES
+   ========================================================= */
+
 .visually-hidden {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* =========================================================
+   ANCHOR TARGETS
+   ========================================================= */
+
+:target {
+    scroll-margin-block-start: 6rem;
 }
 
 
@@ -355,4 +361,19 @@ a:hover {
 .skip-link:focus {
 	transform: translateY(0);
 	color: var(--color-bg);
+}
+
+
+/*
+   reduced-motion baseline
+*/
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

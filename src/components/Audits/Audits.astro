@@ -1,0 +1,196 @@
+---
+import "./Audits.css";
+
+type Audit = {
+    title: string;
+    label: string;
+    description: string;
+    href: string;
+    status: "available" | "coming-soon";
+};
+
+const audits: Audit[] = [
+    {
+        title: "First Audit",
+        label: "consectetur adipiscing elit",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget lacus vitae neque maximus pellentesque. Nam commodo ut orci nec lacinia. Maecenas blandit tempor eleifend. Nullam hendrerit nibh et velit vestibulum pulvinar.",
+        href: "/audits/1",
+        status: "coming-soon",
+    },
+    {
+        title: "Second Audit",
+        label: "consectetur adipiscing elit",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget lacus vitae neque maximus pellentesque. Nam commodo ut orci nec lacinia. Maecenas blandit tempor eleifend. Nullam hendrerit nibh et velit vestibulum pulvinar.",
+        href: "/audits/2",
+        status: "coming-soon",
+    },
+    {
+        title: "Third Audit",
+        label: "consectetur adipiscing elit",
+        description:
+            "Etiam condimentum, nisl id pellentesque sollicitudin, justo justo facilisis est, tempor aliquet sem nulla sit amet sem. Nullam congue, turpis eget auctor tempus, diam dui pretium dui, at scelerisque dolor nisi ultrices lorem.",
+        href: "/audits/3",
+        status: "coming-soon",
+    },
+];
+---
+
+<main
+    id="main-content"
+    tabindex="-1"
+    class="audits-page"
+>
+    <div class="audits-page__inner">
+
+        <header class="audits-page__intro">
+
+            <div>
+                <p class="audits-page__eyebrow">
+                    Audits
+                </p>
+
+                <h1 class="audits-page__title">
+                    Pellentesque.
+                </h1>
+            </div>
+
+            <div class="audits-page__summary">
+
+                <div
+                    class="audits-page__accent-line"
+                    aria-hidden="true"
+                ></div>
+
+                <p>
+                    Pellentesque eget lacus vitae neque maximus pellentesque.
+                    Nam commodo ut orci nec lacinia. Maecenas blandit tempor
+                    eleifend.
+                </p>
+
+                <p>
+                    Nullam hendrerit nibh et velit vestibulum pulvinar.
+                    Pellentesque eget lacus vitae neque maximus pellentesque.
+                </p>
+
+            </div>
+
+        </header>
+
+        <section
+            class="audits-collection"
+            aria-labelledby="audit-list-title"
+        >
+
+            <div class="audits-collection__heading">
+                <h2 id="audit-list-title">
+                    Selected audits
+                </h2>
+            </div>
+
+            <ul class="audits-grid">
+
+                {
+                    audits.map((audit, index) => {
+                        const auditNumber = String(index + 1).padStart(
+                            2,
+                            "0"
+                        );
+
+                        const titleId = `audit-${index + 1}-title`;
+
+                        const cardContent = (
+                            <>
+                                <div
+                                    class="audit-card__visual"
+                                    aria-hidden="true"
+                                >
+                                    <span class="audit-card__number">
+                                        {auditNumber}
+                                    </span>
+                                </div>
+
+                                <div class="audit-card__body">
+
+                                    <p class="audit-card__label">
+                                        {audit.label}
+                                    </p>
+
+                                    <h3
+                                        id={titleId}
+                                        class="audit-card__title"
+                                    >
+                                        {audit.title}
+                                    </h3>
+
+                                    <p class="audit-card__description">
+                                        {audit.description}
+                                    </p>
+
+                                    <div class="audit-card__action">
+
+                                        {
+                                            audit.status === "available" ? (
+                                                <p
+                                                    class="audit-card__cta"
+                                                    aria-hidden="true"
+                                                >
+                                                    <span>
+                                                        View audit
+                                                    </span>
+
+                                                    <span class="audit-card__arrow">
+                                                        →
+                                                    </span>
+                                                </p>
+                                            ) : (
+                                                <p class="audit-card__coming-soon">
+                                                    Audit coming soon
+                                                </p>
+                                            )
+                                        }
+
+                                    </div>
+
+                                </div>
+                            </>
+                        );
+
+                        return (
+                            <li class="audit-card">
+
+                                <article
+                                    class="audit-card__article"
+                                    aria-labelledby={titleId}
+                                >
+
+                                    {
+                                        audit.status === "available" ? (
+                                            <a
+                                                class="audit-card__surface audit-card__surface--link"
+                                                href={audit.href}
+                                                aria-label={`View audit: ${audit.title}`}
+                                            >
+                                                {cardContent}
+                                            </a>
+                                        ) : (
+                                            <div class="audit-card__surface">
+                                                {cardContent}
+                                            </div>
+                                        )
+                                    }
+
+                                </article>
+
+                            </li>
+                        );
+                    })
+                }
+
+            </ul>
+
+        </section>
+
+    </div>
+</main>

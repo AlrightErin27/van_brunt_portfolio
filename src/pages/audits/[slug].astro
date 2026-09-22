@@ -1,25 +1,40 @@
 ---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar/Navbar.astro";
+import Footer from "../../components/Footer/Footer.astro";
+
+import AuditCaseStudy from "../../components/Audits/AuditCaseStudy/AuditCaseStudy.astro";
+
+import {
+    audits,
+    type Audit,
+} from "../../components/Audits/AuditCaseStudy/audits";
+
+/**
+ * Creates one page for each audit slug.
+ */
 export function getStaticPaths() {
-    return [
-        {
-            params: {
-                slug: "e-commerce",
-            },
+    return audits.map((audit) => ({
+        params: {
+            slug: audit.slug,
         },
-        {
-            params: {
-                slug: "public-sector",
-            },
+        props: {
+            audit,
         },
-        {
-            params: {
-                slug: "portfolio",
-            },
-        },
-    ];
+    }));
 }
 
-const { slug } = Astro.params;
+type Props = {
+    audit: Audit;
+};
+
+const { audit } = Astro.props;
 ---
 
-<p>Current audit: {slug}</p>
+<Layout title={`${audit.title} | Erin Van Brunt's Accessibility Portfolio`}>
+    <Navbar />
+
+    <AuditCaseStudy audit={audit} />
+
+    <Footer />
+</Layout>

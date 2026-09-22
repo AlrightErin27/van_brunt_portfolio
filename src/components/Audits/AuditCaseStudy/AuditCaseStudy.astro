@@ -1,3 +1,190 @@
 ---
+import type { Audit } from "./audits";
+
 import "./AuditCaseStudy.css";
+
+type Props = {
+    audit: Audit;
+};
+
+const { audit } = Astro.props;
 ---
+
+<main id="main-content" class="audit-case-study" tabindex="-1">
+    <article class="audit-case-study__inner">
+        <!-- Page introduction -->
+        <header class="audit-case-study__header">
+            <a class="audit-case-study__back-link" href="/audits">
+                ← All audits
+            </a>
+
+            <p class="audit-case-study__eyebrow">
+                {audit.category}
+            </p>
+
+            <h1 class="audit-case-study__title">
+                {audit.title}
+            </h1>
+
+            <p class="audit-case-study__site">
+                {audit.siteName}
+            </p>
+        </header>
+
+        <!-- Why this site was selected -->
+        <section
+            class="audit-case-study__section"
+            aria-labelledby="overview-heading"
+        >
+            <div class="audit-case-study__section-heading">
+                <p class="audit-case-study__number" aria-hidden="true">01</p>
+
+                <h2 id="overview-heading">About this audit</h2>
+            </div>
+
+            <div class="audit-case-study__section-content">
+                <p class="audit-case-study__lead">
+                    {audit.introduction}
+                </p>
+            </div>
+        </section>
+
+        <!-- Testing scope and methods -->
+        <section
+            class="audit-case-study__section"
+            aria-labelledby="methodology-heading"
+        >
+            <div class="audit-case-study__section-heading">
+                <p class="audit-case-study__number" aria-hidden="true">02</p>
+
+                <h2 id="methodology-heading">Scope &amp; methodology</h2>
+            </div>
+
+            <div class="audit-case-study__section-content">
+                <p>
+                    {audit.scope}
+                </p>
+
+                <h3 class="audit-case-study__subheading">Testing methods</h3>
+
+                <ul class="audit-case-study__methods">
+                    {audit.methodology.map((method) => <li>{method}</li>)}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Accessible HTML version of the audit report -->
+        <section
+            class="audit-case-study__section"
+            aria-labelledby="report-heading"
+        >
+            <div class="audit-case-study__section-heading">
+                <p class="audit-case-study__number" aria-hidden="true">03</p>
+
+                <h2 id="report-heading">Accessibility Audit Report</h2>
+            </div>
+
+            <div class="audit-case-study__section-content">
+                <div class="audit-case-study__report">
+                    <p>
+                        The complete audit findings will be presented here as
+                        accessible HTML, including identified barriers, user
+                        impact, relevant WCAG criteria, and recommended
+                        remediation.
+                    </p>
+                </div>
+
+                {
+                    audit.pdfHref ? (
+                        <a
+                            class="audit-case-study__button"
+                            href={audit.pdfHref}
+                            download
+                        >
+                            Download audit PDF
+                            <span aria-hidden="true">↓</span>
+                        </a>
+                    ) : (
+                        <p class="audit-case-study__placeholder">
+                            PDF report will be added when the audit is complete.
+                        </p>
+                    )
+                }
+            </div>
+        </section>
+
+        <!-- Recorded walkthrough -->
+        <section
+            class="audit-case-study__section"
+            aria-labelledby="video-heading"
+        >
+            <div class="audit-case-study__section-heading">
+                <p class="audit-case-study__number" aria-hidden="true">04</p>
+
+                <h2 id="video-heading">Video walkthrough</h2>
+            </div>
+
+            <div class="audit-case-study__section-content">
+                <p>
+                    A recorded walkthrough of the testing process, findings, and
+                    decisions made during the audit.
+                </p>
+
+                {
+                    audit.videoUrl ? (
+                        <div class="audit-case-study__video">
+                            <iframe
+                                src={audit.videoUrl}
+                                title={`Video walkthrough for ${audit.title}`}
+                                loading="lazy"
+                                allowfullscreen
+                            />
+                        </div>
+                    ) : (
+                        <div class="audit-case-study__media-placeholder">
+                            <p>
+                                Video walkthrough will be added after the audit
+                                is complete.
+                            </p>
+                        </div>
+                    )
+                }
+            </div>
+        </section>
+
+        <!-- Longer reflection lives outside the audit report -->
+        <section
+            class="audit-case-study__section"
+            aria-labelledby="reflection-heading"
+        >
+            <div class="audit-case-study__section-heading">
+                <p class="audit-case-study__number" aria-hidden="true">05</p>
+
+                <h2 id="reflection-heading">Reflection</h2>
+            </div>
+
+            <div class="audit-case-study__section-content">
+                <p>
+                    A separate reflection explores the process, challenges, and
+                    lessons from this audit.
+                </p>
+
+                {
+                    audit.reflectionUrl ? (
+                        <a
+                            class="audit-case-study__button"
+                            href={audit.reflectionUrl}
+                        >
+                            Read reflection
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    ) : (
+                        <p class="audit-case-study__placeholder">
+                            Reflection will be added when the audit is complete.
+                        </p>
+                    )
+                }
+            </div>
+        </section>
+    </article>
+</main>

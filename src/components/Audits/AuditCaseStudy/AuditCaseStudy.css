@@ -1,442 +1,391 @@
 /* =========================================================
-   AUDIT CASE STUDY
+   AUDIT CASE STUDY — PAGE LAYOUT
    ========================================================= */
 
 .audit-case-study {
-    min-block-size: 100%;
+  min-block-size: 100%;
+  overflow-x: clip; /* Allow full-bleed media without horizontal scrolling. */
 
-    background-color: var(--color-bg);
-    color: var(--color-text);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 
-    border-block-start:
-        var(--border-width)
-        solid
-        var(--color-border);
+  border-block-start: var(--border-width) solid var(--color-border);
 }
-
 
 .audit-case-study__inner {
-    inline-size:
-        min(
-            100%,
-            var(--content-max-width)
-        );
+  inline-size: min(100%, var(--content-max-width));
+  margin-inline: auto;
 
-    margin-inline: auto;
-
-    padding:
-        clamp(
-            var(--space-7),
-            6vw,
-            var(--space-9)
-        )
-        var(--page-padding);
+  padding: clamp(var(--space-7), var(--space-9)) var(--page-padding);
 }
 
-
 /* =========================================================
-   HEADER
+   HEADER — SHARED STYLES
    ========================================================= */
 
 .audit-case-study__header {
-    max-inline-size: 64rem;
-
-    padding-block-end:
-        clamp(
-            var(--space-8),
-            8vw,
-            var(--space-10)
-        );
+  max-inline-size: 64rem;
+  padding-block-end: clamp(var(--space-8), 8vw, var(--space-10));
 }
-
 
 .audit-case-study__back-link {
-    display: inline-flex;
+  display: inline-flex;
+  align-items: center;
 
-    align-items: center;
+  min-block-size: var(--target-size-min);
+  margin-block-end: var(--space-7);
 
-    min-block-size: var(--target-size-min);
-
-    margin-block-end: var(--space-7);
-
-    color: var(--color-text-secondary);
-
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
 }
-
 
 .audit-case-study__back-link:hover {
-    color: var(--color-accent);
+  color: var(--color-accent);
 }
-
 
 .audit-case-study__eyebrow {
-    margin:
-        0
-        0
-        var(--space-5);
+  margin: 0 0 var(--space-5);
 
-    color: var(--color-accent);
-
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-wider);
-    line-height: var(--line-height-body);
-
-    text-transform: uppercase;
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  line-height: var(--line-height-body);
+  text-transform: uppercase;
 }
-
 
 .audit-case-study__title {
-    max-inline-size: 12ch;
+  max-inline-size: 12ch;
+  margin: 0 0 var(--space-5);
 
-    margin:
-        0
-        0
-        var(--space-5);
-
-    font-size: var(--text-display);
-    font-weight: var(--weight-light);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--line-height-tight);
-
-    text-wrap: balance;
+  font-size: var(--text-display);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--line-height-tight);
+  text-wrap: balance;
 }
-
 
 .audit-case-study__site {
-    margin: 0;
+  margin: 0;
 
-    color: var(--color-text-secondary);
-
-    font-size: var(--text-lg);
-    line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-body);
 }
 
+/* =========================================================
+   HEADER — OPTIONAL FULL-BLEED HERO IMAGE
+   ========================================================= */
+
+.audit-case-study__header--with-image {
+  position: relative;
+  isolation: isolate;
+
+  /* Overrides the regular header's width limit. */
+  max-inline-size: none;
+  min-block-size: clamp(32rem, 48vw, 42rem);
+  padding-block: clamp(var(--space-7), 5vw, var(--space-9));
+}
+
+.audit-case-study__hero-media {
+  position: absolute;
+  z-index: -1;
+
+  inset-block: 0;
+
+  /* Extends past the centered content area to the viewport's right edge. */
+  inset-inline-end: calc(50% - 50vw);
+
+  inline-size: 65%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.audit-case-study__hero-media::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+
+  /* Blend the photo into the background at its left and bottom edges. */
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-bg) 0%,
+      rgb(13 15 16 / 90%) 20%,
+      rgb(13 15 16 / 50%) 55%,
+      rgb(13 15 16 / 15%) 100%
+    ),
+    linear-gradient(0deg, var(--color-bg) 0%, transparent 30%);
+}
+
+.audit-case-study__hero-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter: saturate(0.35) contrast(1.05) brightness(0.8);
+}
+
+.audit-case-study__header--with-image .audit-case-study__title {
+  max-inline-size: 13ch;
+  font-size: clamp(2.75rem, 5.5vw, 5.5rem);
+}
 
 /* =========================================================
-   SECTIONS
+   NUMBERED CONTENT SECTIONS
    ========================================================= */
 
 .audit-case-study__section {
-    display: grid;
+  display: grid;
+  grid-template-columns:
+    minmax(12rem, 0.45fr)
+    minmax(0, 1fr);
 
-    grid-template-columns:
-        minmax(12rem, 0.45fr)
-        minmax(0, 1fr);
+  gap: clamp(var(--space-6), 6vw, var(--space-9));
+  padding-block: clamp(var(--space-7), 6vw, var(--space-9));
 
-    gap:
-        clamp(
-            var(--space-6),
-            6vw,
-            var(--space-9)
-        );
-
-    padding-block:
-        clamp(
-            var(--space-7),
-            6vw,
-            var(--space-9)
-        );
-
-    border-block-start:
-        var(--border-width)
-        solid
-        var(--color-border-strong);
+  border-block-start: var(--border-width) solid var(--color-border-strong);
 }
-
 
 .audit-case-study__section-heading {
-    min-inline-size: 0;
+  min-inline-size: 0;
 }
-
 
 .audit-case-study__section-heading h2 {
-    margin: 0;
+  margin: 0;
 
-    font-size: var(--text-xl);
-    font-weight: var(--weight-regular);
-    letter-spacing: var(--tracking-tight);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-tight);
 }
-
 
 .audit-case-study__number {
-    margin:
-        0
-        0
-        var(--space-3);
+  margin: 0 0 var(--space-3);
 
-    color: var(--color-accent);
-
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: var(--tracking-wider);
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-wider);
 }
-
 
 .audit-case-study__section-content {
-    min-inline-size: 0;
-    max-inline-size: var(--text-max-width);
+  min-inline-size: 0;
+  max-inline-size: var(--text-max-width);
 }
-
 
 .audit-case-study__section-content > :last-child {
-    margin-block-end: 0;
+  margin-block-end: 0;
 }
-
 
 .audit-case-study__lead {
-    color: var(--color-text);
-
-    font-size: var(--text-lg);
-    line-height: var(--line-height-body);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-body);
 }
-
 
 .audit-case-study__subheading {
-    margin:
-        var(--space-6)
-        0
-        var(--space-4);
+  margin: var(--space-6) 0 var(--space-4);
 
-    font-size: var(--text-md);
-    font-weight: var(--weight-semibold);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
 }
-
 
 /* =========================================================
    METHODOLOGY
    ========================================================= */
 
 .audit-case-study__methods {
-    display: grid;
+  display: grid;
+  gap: var(--space-3);
 
-    gap: var(--space-3);
-
-    margin: 0;
-    padding-inline-start: var(--space-5);
+  margin: 0;
+  padding-inline-start: var(--space-5);
 }
-
 
 .audit-case-study__methods li {
-    padding-inline-start: var(--space-2);
-
-    color: var(--color-text-secondary);
+  padding-inline-start: var(--space-2);
+  color: var(--color-text-secondary);
 }
 
-
 /* =========================================================
-   REPORT
+   AUDIT REPORT
    ========================================================= */
 
 .audit-case-study__report {
-    padding:
-        clamp(
-            var(--space-5),
-            3vw,
-            var(--space-6)
-        );
+  padding: clamp(var(--space-5), 3vw, var(--space-6));
 
-    background-color: var(--color-surface);
-
-    border:
-        var(--border-width)
-        solid
-        var(--color-border-strong);
-
-    border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--border-radius-sm);
 }
-
 
 .audit-case-study__report p {
-    margin: 0;
-
-    color: var(--color-text-secondary);
+  margin: 0;
+  color: var(--color-text-secondary);
 }
 
-
 /* =========================================================
-   ACTIONS
+   ACTION LINKS
    ========================================================= */
 
 .audit-case-study__button {
-    display: inline-flex;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
 
-    align-items: center;
-    justify-content: space-between;
+  min-block-size: var(--target-size-min);
+  margin-block-start: var(--space-5);
+  padding: var(--space-3) var(--space-5);
 
-    gap: var(--space-6);
+  color: var(--color-accent);
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-accent);
+  border-radius: var(--border-radius-sm);
 
-    min-block-size: var(--target-size-min);
-
-    margin-block-start: var(--space-5);
-
-    padding:
-        var(--space-3)
-        var(--space-5);
-
-    color: var(--color-accent);
-    background-color: transparent;
-
-    border:
-        var(--border-width)
-        solid
-        var(--color-accent);
-
-    border-radius: var(--border-radius-sm);
-
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-wide);
-
-    text-decoration: none;
-    text-transform: uppercase;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  text-transform: uppercase;
 }
-
 
 .audit-case-study__button:hover,
 .audit-case-study__button:focus-visible {
-    color: var(--color-bg);
-    background-color: var(--color-accent);
+  color: var(--color-bg);
+  background-color: var(--color-accent);
 }
 
-
 /* =========================================================
-   VIDEO
+   VIDEO WALKTHROUGH
    ========================================================= */
 
 .audit-case-study__video {
-    overflow: hidden;
+  overflow: hidden;
+  margin-block-start: var(--space-5);
+  aspect-ratio: 16 / 9;
 
-    margin-block-start: var(--space-5);
-
-    aspect-ratio: 16 / 9;
-
-    background-color: var(--color-surface);
-
-    border:
-        var(--border-width)
-        solid
-        var(--color-border-strong);
-
-    border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--border-radius-sm);
 }
-
 
 .audit-case-study__video iframe {
-    display: block;
-
-    inline-size: 100%;
-    block-size: 100%;
-
-    border: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
 }
-
 
 .audit-case-study__media-placeholder {
-    display: grid;
+  display: grid;
+  place-items: center;
 
-    place-items: center;
+  min-block-size: 18rem;
+  margin-block-start: var(--space-5);
+  padding: var(--space-6);
 
-    min-block-size: 18rem;
-
-    margin-block-start: var(--space-5);
-
-    padding: var(--space-6);
-
-    background-color: var(--color-surface);
-
-    border:
-        var(--border-width)
-        solid
-        var(--color-border-strong);
-
-    border-radius: var(--border-radius-sm);
-
-    text-align: center;
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
 }
-
 
 .audit-case-study__media-placeholder p {
-    margin: 0;
-
-    color: var(--color-text-secondary);
+  margin: 0;
+  color: var(--color-text-secondary);
 }
 
-
 /* =========================================================
-   PLACEHOLDERS
+   PLACEHOLDER TEXT
    ========================================================= */
 
 .audit-case-study__placeholder {
-    margin-block-start: var(--space-5);
-
-    color: var(--color-text-muted);
-
-    font-size: var(--text-sm);
+  margin-block-start: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
 
-
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET AND MOBILE
    ========================================================= */
 
 @media (max-width: 48rem) {
+  .audit-case-study__section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
 
-    .audit-case-study__section {
-        grid-template-columns:
-            minmax(0, 1fr);
+  .audit-case-study__title {
+    max-inline-size: none;
+  }
 
-        gap: var(--space-5);
-    }
+  .audit-case-study__media-placeholder {
+    min-block-size: 12rem;
+  }
 
+  .audit-case-study__header--with-image {
+    min-block-size: 32rem;
+  }
 
-    .audit-case-study__title {
-        max-inline-size: none;
-    }
+  .audit-case-study__hero-media {
+    /* Full-bleed across both sides on mobile. */
+    inset-inline-start: calc(-1 * var(--page-padding));
+    inset-inline-end: auto;
+    inline-size: calc(100% + 2 * var(--page-padding));
+  }
 
+  .audit-case-study__hero-media::after {
+    background: linear-gradient(
+      180deg,
+      rgb(13 15 16 / 75%) 0%,
+      rgb(13 15 16 / 85%) 45%,
+      var(--color-bg) 100%
+    );
+  }
 
-    .audit-case-study__media-placeholder {
-        min-block-size: 12rem;
-    }
-
+  .audit-case-study__header--with-image .audit-case-study__title {
+    max-inline-size: 12ch;
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+  }
 }
-
 
 /* =========================================================
    WINDOWS HIGH CONTRAST / FORCED COLORS
    ========================================================= */
 
 @media (forced-colors: active) {
+  .audit-case-study,
+  .audit-case-study__report,
+  .audit-case-study__media-placeholder {
+    color: CanvasText;
+    background-color: Canvas;
+  }
 
-    .audit-case-study,
-    .audit-case-study__report,
-    .audit-case-study__media-placeholder {
-        color: CanvasText;
-        background-color: Canvas;
-    }
+  .audit-case-study__hero-media {
+    display: none; /* Decorative image is unnecessary in forced-colors mode. */
+  }
 
+  .audit-case-study__section,
+  .audit-case-study__report,
+  .audit-case-study__media-placeholder {
+    border-color: CanvasText;
+  }
 
-    .audit-case-study__section,
-    .audit-case-study__report,
-    .audit-case-study__media-placeholder {
-        border-color: CanvasText;
-    }
+  .audit-case-study__button {
+    color: LinkText;
+    border-color: LinkText;
+  }
 
-
-    .audit-case-study__button {
-        color: LinkText;
-        border-color: LinkText;
-    }
-
-
-    .audit-case-study__button:hover,
-    .audit-case-study__button:focus-visible {
-        color: HighlightText;
-        background-color: Highlight;
-        border-color: Highlight;
-    }
-
+  .audit-case-study__button:hover,
+  .audit-case-study__button:focus-visible {
+    color: HighlightText;
+    background-color: Highlight;
+    border-color: Highlight;
+  }
 }

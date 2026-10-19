@@ -1,5 +1,6 @@
 ---
 import type { Audit } from "./audits";
+import AuditReports from "./AuditReports/AuditReports.astro";
 
 import "./AuditCaseStudy.css";
 import { Image } from "astro:assets";
@@ -101,31 +102,30 @@ const { audit } = Astro.props;
     </section>
 
     <!-- Accessible HTML version of the audit report -->
+
+    <!-- Completed evaluation reports -->
     <section class="audit-case-study__section" aria-labelledby="report-heading">
       <div class="audit-case-study__section-heading">
         <p class="audit-case-study__number" aria-hidden="true">03</p>
 
-        <h2 id="report-heading">Accessibility Audit Report</h2>
+        <h2 id="report-heading">Accessibility evaluation reports</h2>
       </div>
 
       <div class="audit-case-study__section-content">
-        <div class="audit-case-study__report">
-          <p>
-            The complete audit findings will be presented here as accessible
-            HTML, including identified barriers, user impact, relevant WCAG
-            criteria, and recommended remediation.
-          </p>
-        </div>
-
         {
-          audit.pdfHref ? (
-            <a class="audit-case-study__button" href={audit.pdfHref} download>
-              Download audit PDF
-              <span aria-hidden="true">↓</span>
-            </a>
+          audit.reports && audit.reports.length > 0 ? (
+            <>
+              <p>
+                The following reports document the completed accessibility
+                evaluation work. Each report is available to view in your
+                browser or download as a PDF.
+              </p>
+
+              <AuditReports reports={audit.reports} />
+            </>
           ) : (
             <p class="audit-case-study__placeholder">
-              PDF report will be added when the audit is complete.
+              Evaluation reports are not available yet.
             </p>
           )
         }

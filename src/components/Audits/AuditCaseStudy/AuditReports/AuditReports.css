@@ -1,0 +1,172 @@
+/* =========================================================
+   AUDIT REPORTS
+   Reusable PDF report cards
+   ========================================================= */
+
+.audit-reports {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* =========================================================
+   REPORT LIST
+   ========================================================= */
+
+.audit-reports__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.audit-reports__item {
+  min-inline-size: 0;
+}
+
+/* =========================================================
+   REPORT CARD
+   ========================================================= */
+
+.audit-reports__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+
+  block-size: 100%;
+  min-inline-size: 0;
+
+  padding: clamp(var(--space-5), 3vw, var(--space-6));
+
+  background-color: var(--color-surface);
+
+  border: var(--border-width) solid var(--color-border-strong);
+
+  border-radius: var(--border-radius-sm);
+}
+
+/* =========================================================
+   REPORT CONTENT
+   ========================================================= */
+
+.audit-reports__content {
+  min-inline-size: 0;
+}
+
+.audit-reports__meta {
+  margin: 0 0 var(--space-4);
+
+  color: var(--color-accent);
+
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  line-height: var(--line-height-body);
+
+  text-transform: uppercase;
+}
+
+.audit-reports__title {
+  margin: 0 0 var(--space-4);
+
+  color: var(--color-text);
+
+  font-size: var(--text-xl);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--line-height-heading);
+
+  text-wrap: balance;
+}
+
+.audit-reports__description {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--text-base);
+  line-height: var(--line-height-body);
+}
+
+/* =========================================================
+   REPORT ACTIONS
+   Reuses .audit-case-study__button
+   ========================================================= */
+
+.audit-reports__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: var(--space-3);
+
+  margin-block-start: auto;
+  padding-block-start: var(--space-5);
+
+  border-block-start: var(--border-width) solid var(--color-border-strong);
+}
+
+/* Remove the default top margin from shared buttons. */
+.audit-reports__actions .audit-case-study__button {
+  margin-block-start: 0;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   INTERACTIVE STATES
+   ========================================================= */
+
+/* Reinforce the active card without relying on color alone. */
+.audit-reports__card:focus-within {
+  border-color: var(--color-accent);
+}
+
+/* Link focus outlines are provided by global styles.css. */
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 30rem) {
+  .audit-reports__card {
+    padding: var(--space-5);
+  }
+
+  .audit-reports__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .audit-reports__actions .audit-case-study__button {
+    inline-size: 100%;
+  }
+}
+
+/* =========================================================
+   WINDOWS HIGH CONTRAST / FORCED COLORS
+   ========================================================= */
+
+@media (forced-colors: active) {
+  .audit-reports__card {
+    color: CanvasText;
+    background-color: Canvas;
+    border-color: CanvasText;
+  }
+
+  .audit-reports__card:focus-within {
+    border-color: Highlight;
+  }
+
+  .audit-reports__meta,
+  .audit-reports__title,
+  .audit-reports__description {
+    color: CanvasText;
+  }
+
+  .audit-reports__actions {
+    border-color: CanvasText;
+  }
+}

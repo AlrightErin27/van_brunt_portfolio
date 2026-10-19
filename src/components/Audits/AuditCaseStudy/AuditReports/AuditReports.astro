@@ -1,0 +1,57 @@
+---
+import type { AuditReport } from "../audits";
+
+import "./AuditReports.css";
+
+type Props = {
+  reports: AuditReport[];
+};
+
+const { reports } = Astro.props;
+---
+
+<!-- Reusable list of accessibility evaluation reports -->
+<div class="audit-reports">
+  <ul class="audit-reports__list">
+    {
+      reports.map((report) => (
+        <li class="audit-reports__item">
+          <article class="audit-reports__card">
+            <div class="audit-reports__content">
+              <p class="audit-reports__meta">PDF · {report.pageCount} pages</p>
+
+              <h3 class="audit-reports__title">{report.title}</h3>
+
+              <p class="audit-reports__description">{report.description}</p>
+            </div>
+
+            <div class="audit-reports__actions">
+              <a
+                class="audit-case-study__button"
+                href={report.pdfHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View PDF
+                <span class="visually-hidden">
+                  : {report.title} (opens in a new tab)
+                </span>
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a
+                class="audit-case-study__button"
+                href={report.pdfHref}
+                download
+              >
+                Download PDF
+                <span class="visually-hidden">: {report.title}</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</div>

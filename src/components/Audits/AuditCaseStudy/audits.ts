@@ -1,5 +1,14 @@
 import type { ImageMetadata } from "astro";
-import svMarketBanner from "../../../assets/svMarket-banner.webp";
+import svMarketBanner from "../../../assets/audits/scotts-valley-market/svMarket-banner.webp";
+
+/* Individual PDF report information */
+export type AuditReport = {
+  title: string;
+  description: string;
+  pageCount: number;
+  pdfHref: string;
+};
+
 export type Audit = {
   slug: string;
   title: string;
@@ -10,6 +19,7 @@ export type Audit = {
   introduction: string;
   scope: string;
   methodology: string[];
+  reports?: AuditReport[];
   pdfHref: string;
   videoUrl: string;
   reflectionUrl: string;
@@ -73,6 +83,22 @@ export const audits: Audit[] = [
       "Semantic HTML and document structure inspection",
       "Accessible name and role inspection using Chrome DevTools",
       "WCAG-EM-informed evaluation and targeted WCAG 2.2 A/AA findings documentation",
+    ],
+    reports: [
+      {
+        title: "Keyboard Accessibility Evaluation",
+        description:
+          "A 28-page manual keyboard accessibility evaluation covering the homepage, shared components, product detail, shopping cart, and checkout entry. Includes confirmed WCAG 2.2 findings, reproduction steps, user impact, and remediation recommendations.",
+        pageCount: 28,
+        pdfHref: "/audits/ScottsValleyMarketKeyboardEvaluation.pdf",
+      },
+      {
+        title: "Semantic HTML & Accessible Name Review",
+        description:
+          "A 16-page evaluation of the homepage's semantic structure, landmarks, headings, interactive elements, and accessible names. Includes confirmed findings, recommendations, WCAG coverage documentation, and limitations resulting from the website redesign.",
+        pageCount: 16,
+        pdfHref: "/audits/ScottsValleyMarketSemanticEvaluation.pdf",
+      },
     ],
     pdfHref: "",
     videoUrl: "",

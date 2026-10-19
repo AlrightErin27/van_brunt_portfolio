@@ -1,129 +1,132 @@
 ---
 import "./Audits.css";
+import svMarketCard from "/src/assets/svMarket.png";
+import type { ImageMetadata } from "astro";
 
 type Audit = {
-    title: string;
-    label: string;
-    description: string;
-    href: string;
+  title: string;
+  label: string;
+  img?: ImageMetadata;
+  description: string;
+  href: string;
 };
 
 const audits: Audit[] = [
-    {
-        title: "E-Commerce Accessibility Audit",
-        label: "E-Commerce",
-        description:
-            "An accessibility review of a small local e-commerce experience, focusing on key user flows such as navigation, product browsing, forms, cart interactions, keyboard access, focus behavior, and checkout-related tasks.",
-        href: "/audits/e-commerce",
-    },
+  {
+    title: "Public-Sector Accessibility Audit",
+    label: "Public Sector",
+    description:
+      "An accessibility review of a local public-service website, with attention to navigation, search, forms, document access, semantic structure, keyboard interaction, and the usability of essential community information.",
+    href: "/audits/public-sector",
+  },
 
-    {
-        title: "Public-Sector Accessibility Audit",
-        label: "Public Sector",
-        description:
-            "An accessibility review of a local public-service website, with attention to navigation, search, forms, document access, semantic structure, keyboard interaction, and the usability of essential community information.",
-        href: "/audits/public-sector",
-    },
-
-    {
-        title: "Portfolio Accessibility Audit",
-        label: "Portfolio",
-        description:
-            "A full accessibility review of this portfolio, including issue identification, remediation, and retesting. This case study documents both the testing process and the implementation of accessibility improvements.",
-        href: "/audits/portfolio",
-    },
+  {
+    title: "Portfolio Accessibility Audit",
+    label: "Portfolio",
+    description:
+      "A full accessibility review of this portfolio, including issue identification, remediation, and retesting. This case study documents both the testing process and the implementation of accessibility improvements.",
+    href: "/audits/portfolio",
+  },
+  {
+    title: "Scotts Valley Market",
+    label: "E-Commerce",
+    img: svMarketCard,
+    description:
+      "A WCAG 2.2 accessibility evaluation of a local grocery store's website, examining keyboard navigation, focus behavior, shopping interactions, and semantic HTML. The audit was discontinued following a major website redesign, with completed findings preserved and documented.",
+    href: "/audits/scotts-valley-market",
+  },
 ];
 ---
 
 <main id="main-content" tabindex="-1" class="audits-page">
-    <div class="audits-page__inner">
-        <header class="audits-page__intro">
-            <div>
-                <p class="audits-page__eyebrow">Audits</p>
+  <div class="audits-page__inner">
+    <header class="audits-page__intro">
+      <div>
+        <p class="audits-page__eyebrow">Audits</p>
 
-                <h1 class="audits-page__title">
-                    <span class="visually-hidden">Accessibility audits: </span>
-                    Accessibility, examined.
-                </h1>
-            </div>
+        <h1 class="audits-page__title">
+          <span class="visually-hidden">Accessibility audits: </span>
+          Accessibility, examined.
+        </h1>
+      </div>
 
-            <div class="audits-page__summary">
-                <div class="audits-page__accent-line" aria-hidden="true"></div>
+      <div class="audits-page__summary">
+        <div class="audits-page__accent-line" aria-hidden="true"></div>
 
-                <p>
-                    These audits evaluate digital experiences through the lens
-                    of universal design, inclusive usability, and WCAG 2.2 Level
-                    AA. Each review combines manual testing, assistive
-                    technology, and automated tools to identify barriers that
-                    can affect people with disabilities.
-                </p>
+        <p>
+          These audits evaluate digital experiences through the lens of
+          universal design, inclusive usability, and WCAG 2.2 Level AA. Each
+          review combines manual testing, assistive technology, and automated
+          tools to identify barriers that can affect people with disabilities.
+        </p>
 
-                <p>
-                    The goal is not just to flag issues, but to understand their
-                    impact, document them clearly, and recommend practical
-                    remediation that supports more usable, resilient experiences
-                    for everyone.
-                </p>
-            </div>
-        </header>
+        <p>
+          The goal is not just to flag issues, but to understand their impact,
+          document them clearly, and recommend practical remediation that
+          supports more usable, resilient experiences for everyone.
+        </p>
+      </div>
+    </header>
 
-        <section class="audits-collection" aria-labelledby="audit-list-title">
-            <div class="audits-collection__heading">
-                <h2 id="audit-list-title">Selected audits</h2>
-            </div>
+    <section class="audits-collection" aria-labelledby="audit-list-title">
+      <div class="audits-collection__heading">
+        <h2 id="audit-list-title">Selected audits</h2>
+      </div>
 
-            <ul class="audits-grid">
-                {
-                    audits.map((audit, index) => {
-                        const auditNumber = String(index + 1).padStart(2, "0");
+      <ul class="audits-grid">
+        {
+          audits.map((audit, index) => {
+            const auditNumber = String(index + 1).padStart(2, "0");
 
-                        const titleId = `audit-${index + 1}-title`;
+            const titleId = `audit-${index + 1}-title`;
 
-                        return (
-                            <li class="audit-card">
-                                <article
-                                    class="audit-card__article"
-                                    aria-labelledby={titleId}
-                                >
-                                    <a
-                                        class="audit-card__surface audit-card__surface--link"
-                                        href={audit.href}
-                                        aria-label={`View audit: ${audit.title}`}
-                                    >
-                                        <div
-                                            class="audit-card__visual"
-                                            aria-hidden="true"
-                                        >
-                                            <span class="audit-card__number">
-                                                {auditNumber}
-                                            </span>
-                                        </div>
+            return (
+              <li class="audit-card">
+                <article class="audit-card__article" aria-labelledby={titleId}>
+                  <a
+                    class="audit-card__surface audit-card__surface--link"
+                    href={audit.href}
+                    aria-label={`View audit: ${audit.title}`}
+                  >
+                    <div
+                      class:list={[
+                        "audit-card__visual",
+                        { "audit-card__visual--image": !!audit.img },
+                      ]}
+                      aria-hidden="true"
+                    >
+                      {audit.img && (
+                        <img
+                          class="audit-card__image"
+                          src={audit.img.src}
+                          width={audit.img.width}
+                          height={audit.img.height}
+                          alt=""
+                          loading="lazy"
+                        />
+                      )}
 
-                                        <div class="audit-card__body">
-                                            <p class="audit-card__label">
-                                                {audit.label}
-                                            </p>
+                      <span class="audit-card__number">{auditNumber}</span>
+                    </div>
 
-                                            <h3
-                                                id={titleId}
-                                                class="audit-card__title"
-                                            >
-                                                {audit.title}
-                                            </h3>
+                    <div class="audit-card__body">
+                      <p class="audit-card__label">{audit.label}</p>
 
-                                            <p class="audit-card__description">
-                                                {audit.description}
-                                            </p>
+                      <h3 id={titleId} class="audit-card__title">
+                        {audit.title}
+                      </h3>
 
-                                            <div class="audit-card__action" />
-                                        </div>
-                                    </a>
-                                </article>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
-        </section>
-    </div>
+                      <p class="audit-card__description">{audit.description}</p>
+
+                      <div class="audit-card__action" />
+                    </div>
+                  </a>
+                </article>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+  </div>
 </main>

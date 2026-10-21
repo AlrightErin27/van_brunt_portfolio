@@ -20,8 +20,7 @@ export type Audit = {
   scope: string;
   methodology: string[];
   reports?: AuditReport[];
-  pdfHref: string;
-  videoUrl: string;
+  videoUrl?: string;
   reflectionUrl: string;
 };
 
@@ -41,7 +40,6 @@ export const audits: Audit[] = [
       "Automated accessibility testing",
       "Manual WCAG 2.2 Level AA review",
     ],
-    pdfHref: "",
     videoUrl: "",
     reflectionUrl: "",
   },
@@ -62,7 +60,6 @@ export const audits: Audit[] = [
       "Automated accessibility testing",
       "Manual WCAG 2.2 Level AA review",
     ],
-    pdfHref: "",
     videoUrl: "",
     reflectionUrl: "",
   },
@@ -100,8 +97,6 @@ export const audits: Audit[] = [
         pdfHref: "/audits/ScottsValleyMarketSemanticEvaluation.pdf",
       },
     ],
-    pdfHref: "",
-    videoUrl: "",
     reflectionUrl:
       "https://medium.com/@erinmontybruce/when-the-website-changes-mid-audit-reflections-on-scotts-valley-market-670da1b73ff7?postPublishedType=initial",
   },

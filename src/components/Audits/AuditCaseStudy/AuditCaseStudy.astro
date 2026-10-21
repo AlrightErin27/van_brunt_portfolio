@@ -133,21 +133,28 @@ const { audit } = Astro.props;
     </section>
 
     <!-- Recorded walkthrough -->
-    <section class="audit-case-study__section" aria-labelledby="video-heading">
-      <div class="audit-case-study__section-heading">
-        <p class="audit-case-study__number" aria-hidden="true">04</p>
 
-        <h2 id="video-heading">Video walkthrough</h2>
-      </div>
+    <!-- Optional video walkthrough: hidden when no video URL exists -->
+    {
+      audit.videoUrl && (
+        <section
+          class="audit-case-study__section"
+          aria-labelledby="video-heading"
+        >
+          <div class="audit-case-study__section-heading">
+            <p class="audit-case-study__number" aria-hidden="true">
+              04
+            </p>
 
-      <div class="audit-case-study__section-content">
-        <p>
-          A recorded walkthrough of the testing process, findings, and decisions
-          made during the audit.
-        </p>
+            <h2 id="video-heading">Video walkthrough</h2>
+          </div>
 
-        {
-          audit.videoUrl ? (
+          <div class="audit-case-study__section-content">
+            <p>
+              A recorded walkthrough of the testing process, findings, and
+              decisions made during the audit.
+            </p>
+
             <div class="audit-case-study__video">
               <iframe
                 src={audit.videoUrl}
@@ -156,16 +163,10 @@ const { audit } = Astro.props;
                 allowfullscreen
               />
             </div>
-          ) : (
-            <div class="audit-case-study__media-placeholder">
-              <p>
-                Video walkthrough will be added after the audit is complete.
-              </p>
-            </div>
-          )
-        }
-      </div>
-    </section>
+          </div>
+        </section>
+      )
+    }
 
     <!-- Longer reflection lives outside the audit report -->
     <section

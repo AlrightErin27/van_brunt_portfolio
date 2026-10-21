@@ -260,8 +260,6 @@
 
   object-fit: cover;
   object-position: center top;
-
-  filter: grayscale(100%);
 }
 
 /* Remove placeholder graphics when an image exists */

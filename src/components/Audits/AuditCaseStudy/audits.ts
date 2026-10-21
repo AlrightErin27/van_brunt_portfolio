@@ -1,5 +1,6 @@
 import type { ImageMetadata } from "astro";
 import svMarketBanner from "../../../assets/audits/scotts-valley-market/svMarket-banner.jpg";
+import evbPortfolioBanner from "../../../assets/audits/evb-portfolio/evbPortfolio-banner.jpg";
 
 /* Individual PDF report information */
 export type AuditReport = {
@@ -47,10 +48,11 @@ export const audits: Audit[] = [
   },
 
   {
-    slug: "portfolio",
+    slug: "evb-portfolio",
     title: "Portfolio Accessibility Audit",
+    heroImg: evbPortfolioBanner,
     siteName: "Erin Van Brunt Accessibility Portfolio",
-    category: "Portfolio",
+    category: "Personal Portfolio",
     introduction:
       "An accessibility audit of my own portfolio, including remediation and retesting.",
     scope:

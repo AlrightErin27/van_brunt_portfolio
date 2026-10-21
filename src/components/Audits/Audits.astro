@@ -1,6 +1,7 @@
 ---
 import "./Audits.css";
 import svMarketCard from "../../assets/audits/scotts-valley-market/svMarket.jpg";
+import evbPortfolioCard from "../../assets/audits/evb-portfolio/evbPortfolio.jpg";
 import type { ImageMetadata } from "astro";
 
 type Audit = {
@@ -23,9 +24,10 @@ const audits: Audit[] = [
   {
     title: "Portfolio Accessibility Audit",
     label: "Portfolio",
+    img: evbPortfolioCard,
     description:
       "A full accessibility review of this portfolio, including issue identification, remediation, and retesting. This case study documents both the testing process and the implementation of accessibility improvements.",
-    href: "/audits/portfolio",
+    href: "/audits/evb-portfolio",
   },
   {
     title: "Scotts Valley Market",

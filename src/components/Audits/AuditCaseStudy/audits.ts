@@ -57,12 +57,14 @@ export const audits: Audit[] = [
       "An accessibility audit of my own portfolio, including remediation and retesting.",
     scope:
       "The portfolio will be evaluated across its primary pages and core navigation.",
-    methodology: [
-      "Keyboard testing",
-      "VoiceOver testing",
-      "Zoom and reflow testing",
-      "Automated accessibility testing",
-      "Manual WCAG 2.2 Level AA review",
+    methodology: [""],
+    reports: [
+      {
+        title: "Keyboard Accessibility Evaluation",
+        description: "",
+        pageCount: 2,
+        pdfHref: "/audits/evb-portfolio/EvbPortfolioKeyboardEvaluation.pdf",
+      },
     ],
     disclaimer: "",
     videoUrl: "",
@@ -92,14 +94,16 @@ export const audits: Audit[] = [
         description:
           "A 28-page manual keyboard accessibility evaluation covering the homepage, shared components, product detail, shopping cart, and checkout entry. Includes confirmed WCAG 2.2 findings, reproduction steps, user impact, and remediation recommendations.",
         pageCount: 28,
-        pdfHref: "/audits/ScottsValleyMarketKeyboardEvaluation.pdf",
+        pdfHref:
+          "/audits/scotts-valley-market/ScottsValleyMarketKeyboardEvaluation.pdf",
       },
       {
         title: "Semantic HTML & Accessible Name Review",
         description:
           "A 16-page evaluation of the homepage's semantic structure, landmarks, headings, interactive elements, and accessible names. Includes confirmed findings, recommendations, WCAG coverage documentation, and limitations resulting from the website redesign.",
         pageCount: 16,
-        pdfHref: "/audits/ScottsValleyMarketSemanticEvaluation.pdf",
+        pdfHref:
+          "/audits/scotts-valley-market/ScottsValleyMarketSemanticEvaluation.pdf",
       },
     ],
     disclaimer:

@@ -59,10 +59,14 @@ const { audit } = Astro.props;
       </p>
 
       <!-- General independent evaluation notice -->
-      <p class="audit-case-study__header-notice">
-        Independent accessibility evaluation for portfolio purposes. Not
-        commissioned, sponsored, or endorsed by the website owner.
-      </p>
+      {
+        audit.disclaimer ? (
+          <p class="audit-case-study__header-notice">
+            Independent accessibility evaluation for portfolio purposes. Not
+            commissioned, sponsored, or endorsed by the website owner.
+          </p>
+        ) : null
+      }
     </header>
 
     <!-- Why this site was selected -->
@@ -135,12 +139,16 @@ const { audit } = Astro.props;
         }
       </div>
 
-      <div class="audit-case-study__report-notice">
-        <p>
-          <strong>Independent Evaluation &amp; Scope Notice</strong>
-        </p>
-      </div>
-      <p>{audit.disclaimer}</p>
+
+      {audit.disclaimer? (      
+        <div class="audit-case-study__report-notice">
+          <p>
+            <strong>Independent Evaluation &amp; Scope Notice</strong>
+          </p>
+       </div>
+       <p>{audit.disclaimer}</p>) 
+       : null}
+
     </section>
 
     <!-- Recorded walkthrough -->

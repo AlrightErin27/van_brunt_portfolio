@@ -21,37 +21,38 @@ export type Audit = {
   scope: string;
   methodology: string[];
   reports?: AuditReport[];
-  disclaimer: string;
+  disclaimer?: string;
   videoUrl?: string;
   reflectionUrl: string;
 };
 
 export const audits: Audit[] = [
-  {
-    slug: "public-sector",
-    title: "Public-Sector Accessibility Audit",
-    siteName: "Site name coming soon",
-    category: "Public Sector",
-    introduction:
-      "A short explanation of the site and why I selected it for this accessibility audit.",
-    scope: "A representative set of pages and user flows will be evaluated.",
-    methodology: [
-      "Keyboard testing",
-      "VoiceOver testing",
-      "Zoom and reflow testing",
-      "Automated accessibility testing",
-      "Manual WCAG 2.2 Level AA review",
-    ],
-    disclaimer: "",
-    videoUrl: "",
-    reflectionUrl: "",
-  },
+  // {
+  //   slug: "public-sector",
+  //   title: "Public-Sector Accessibility Audit",
+  //   siteName: "Site name coming soon",
+  //   category: "Public Sector",
+  //   introduction:
+  //     "A short explanation of the site and why I selected it for this accessibility audit.",
+  //   scope: "A representative set of pages and user flows will be evaluated.",
+  //   methodology: [
+  //     "Keyboard testing",
+  //     "VoiceOver testing",
+  //     "Zoom and reflow testing",
+  //     "Automated accessibility testing",
+  //     "Manual WCAG 2.2 Level AA review",
+  //   ],
+  //   disclaimer: "",
+  //   videoUrl: "",
+  //   reflectionUrl: "",
+  // },
 
   {
     slug: "evb-portfolio",
     title: "Portfolio Accessibility Audit",
     heroImg: evbPortfolioBanner,
     siteName: "Erin Van Brunt Accessibility Portfolio",
+    siteUrl: "https://van-brunt-portfolio.vercel.app/",
     category: "Personal Portfolio",
     introduction:
       "An accessibility audit of my own portfolio, including remediation and retesting.",
@@ -66,7 +67,6 @@ export const audits: Audit[] = [
         pdfHref: "/audits/evb-portfolio/EvbPortfolioKeyboardEvaluation.pdf",
       },
     ],
-    disclaimer: "",
     videoUrl: "",
     reflectionUrl: "",
   },

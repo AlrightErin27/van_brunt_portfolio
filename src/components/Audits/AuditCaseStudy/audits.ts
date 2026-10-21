@@ -102,6 +102,7 @@ export const audits: Audit[] = [
     ],
     pdfHref: "",
     videoUrl: "",
-    reflectionUrl: "",
+    reflectionUrl:
+      "https://medium.com/@erinmontybruce/when-the-website-changes-mid-audit-reflections-on-scotts-valley-market-670da1b73ff7?postPublishedType=initial",
   },
 ];

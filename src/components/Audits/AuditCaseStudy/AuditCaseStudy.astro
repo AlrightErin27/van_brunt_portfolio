@@ -179,21 +179,27 @@ const { audit } = Astro.props;
       </div>
 
       <div class="audit-case-study__section-content">
-        <p>
-          A separate reflection explores the process, challenges, and lessons
-          from this audit.
-        </p>
+        <p>Behind the audit.</p>
 
         {
           audit.reflectionUrl ? (
-            <a class="audit-case-study__button" href={audit.reflectionUrl}>
-              Read reflection
-              <span aria-hidden="true">→</span>
-            </a>
+            <>
+              <p>
+                In this personal blog post, I reflect on my accessibility
+                evaluation of Scotts Valley Market, one of the projects featured
+                in this portfolio. I share what surprised me about the online
+                shopping experience, the accessibility barriers I uncovered, and
+                what I learned when the website was unexpectedly redesigned
+                mid-audit.
+              </p>
+
+              <a class="audit-case-study__button" href={audit.reflectionUrl}>
+                Read my reflection on Medium
+                <span aria-hidden="true">↗</span>
+              </a>
+            </>
           ) : (
-            <p class="audit-case-study__placeholder">
-              Reflection will be added when the audit is complete.
-            </p>
+            <p class="audit-case-study__placeholder">Reflection coming soon.</p>
           )
         }
       </div>

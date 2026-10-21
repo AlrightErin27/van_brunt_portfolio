@@ -16,7 +16,7 @@
   inline-size: min(100%, var(--content-max-width));
   margin-inline: auto;
 
-  padding: clamp(var(--space-7), var(--space-9)) var(--page-padding);
+  padding: clamp(var(--space-7), 6vw, var(--space-9)) var(--page-padding);
 }
 
 /* =========================================================
@@ -227,6 +227,85 @@
 .audit-case-study__report p {
   margin: 0;
   color: var(--color-text-secondary);
+}
+
+/* =========================================================
+   REPORT — INDEPENDENT EVALUATION NOTICE
+   ========================================================= */
+
+/* Notice heading — left column */
+.audit-case-study__report-notice {
+  grid-column: 1;
+  min-inline-size: 0;
+
+  margin-block-start: var(--space-6);
+  padding: 0;
+
+  background: transparent;
+  border: none;
+}
+
+.audit-case-study__report-notice p {
+  margin: 0;
+}
+
+.audit-case-study__report-notice strong {
+  color: var(--color-text-secondary);
+
+  font-size: var(--text-sm);
+  font-style: italic;
+  font-weight: var(--weight-medium);
+  line-height: var(--line-height-body);
+}
+
+/* Notice text — right column */
+.audit-case-study__report-notice + p {
+  grid-column: 2;
+  min-inline-size: 0;
+
+  max-inline-size: var(--text-max-width);
+
+  margin-block: var(--space-6) 0;
+  padding: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--text-sm);
+  font-style: normal;
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-body);
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 48rem) {
+  .audit-case-study__report-notice,
+  .audit-case-study__report-notice + p {
+    grid-column: 1 / -1;
+  }
+
+  .audit-case-study__report-notice {
+    margin-block-start: var(--space-6);
+  }
+
+  .audit-case-study__report-notice + p {
+    margin-block-start: var(--space-2);
+  }
+}
+
+/* =========================================================
+   FORCED COLORS / HIGH CONTRAST
+   ========================================================= */
+
+@media (forced-colors: active) {
+  .audit-case-study__report-notice strong,
+  .audit-case-study__report-notice + p {
+    color: CanvasText;
+  }
 }
 
 /* =========================================================

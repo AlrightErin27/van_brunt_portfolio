@@ -20,6 +20,7 @@ export type Audit = {
   scope: string;
   methodology: string[];
   reports?: AuditReport[];
+  disclaimer: string;
   videoUrl?: string;
   reflectionUrl: string;
 };
@@ -40,6 +41,7 @@ export const audits: Audit[] = [
       "Automated accessibility testing",
       "Manual WCAG 2.2 Level AA review",
     ],
+    disclaimer: "",
     videoUrl: "",
     reflectionUrl: "",
   },
@@ -60,6 +62,7 @@ export const audits: Audit[] = [
       "Automated accessibility testing",
       "Manual WCAG 2.2 Level AA review",
     ],
+    disclaimer: "",
     videoUrl: "",
     reflectionUrl: "",
   },
@@ -97,6 +100,8 @@ export const audits: Audit[] = [
         pdfHref: "/audits/ScottsValleyMarketSemanticEvaluation.pdf",
       },
     ],
+    disclaimer:
+      "This independent accessibility evaluation was conducted in October 2026 solely for educational purposes and inclusion in my personal professional portfolio. It was not commissioned, sponsored, authorized, or endorsed by Scotts Valley Market, and no affiliation with the business is implied. The findings document observations made during testing of the website as it existed at that time, before a significant redesign interrupted the evaluation. Results are limited to the specific pages, components, and interactions examined and should not be interpreted as a comprehensive WCAG conformance assessment, a legal compliance determination, or a representation of the accessibility of the current website. All findings and recommendations are presented in good faith for technical analysis, professional development, and accessibility education.",
     reflectionUrl:
       "https://medium.com/@erinmontybruce/when-the-website-changes-mid-audit-reflections-on-scotts-valley-market-670da1b73ff7?postPublishedType=initial",
   },

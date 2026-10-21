@@ -16,7 +16,7 @@
   inline-size: min(100%, var(--content-max-width));
   margin-inline: auto;
 
-  padding: clamp(var(--space-7), 6vw, var(--space-9)) var(--page-padding);
+  padding: clamp(var(--space-7), var(--space-9)) var(--page-padding);
 }
 
 /* =========================================================

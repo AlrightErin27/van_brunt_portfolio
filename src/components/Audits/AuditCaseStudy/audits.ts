@@ -1,5 +1,5 @@
 import type { ImageMetadata } from "astro";
-import svMarketBanner from "../../../assets/audits/scotts-valley-market/svMarket-banner.webp";
+import svMarketBanner from "../../../assets/audits/scotts-valley-market/svMarket-banner.jpg";
 
 /* Individual PDF report information */
 export type AuditReport = {

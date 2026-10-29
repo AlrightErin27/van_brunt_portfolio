@@ -62,9 +62,15 @@ export const audits: Audit[] = [
     reports: [
       {
         title: "Keyboard Accessibility Evaluation",
-        description: "",
+        description: "Audit of Home Page",
         pageCount: 2,
         pdfHref: "/audits/evb-portfolio/EvbPortfolioKeyboardEvaluation.pdf",
+      },
+      {
+        title: "Semantic Accessibility Evaluation",
+        description: "Audit of Home Page",
+        pageCount: 3,
+        pdfHref: "/audits/evb-portfolio/EvbPortfolioSemanticEvaluation.pdf",
       },
     ],
     videoUrl: "",

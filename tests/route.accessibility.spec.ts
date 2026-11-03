@@ -29,7 +29,7 @@ for (const route of routes) {
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
         .analyze();
 
-      // 📊 Display all rule results.
+      // 📊 Log complete results for the detailed text report.
       const categories = [
         { key: "passes", label: "✅ PASSES" },
         { key: "violations", label: "❌ VIOLATIONS" },
@@ -47,7 +47,7 @@ for (const route of routes) {
         }
       }
 
-      // 🔍 Explain findings requiring additional review.
+      // 🔍 Explain findings requiring manual review.
       console.log("\n🔍 === FINDINGS REQUIRING REVIEW ===\n");
 
       if (results.incomplete.length === 0) {
@@ -58,16 +58,39 @@ for (const route of routes) {
         console.log(`\n⚠️ Needs review: ${rule.id}`);
 
         for (const node of rule.nodes) {
-          console.log("📍 Element:", node.target.join(" > "));
+          console.log(`📍 Element: ${node.target.join(" > ")}`);
 
           for (const check of [...node.any, ...node.all, ...node.none]) {
-            console.log("   Reason:", check.message);
+            if (check.message) {
+              console.log(`   Reason: ${check.message}`);
+            }
           }
         }
       }
 
-      // ✅ Fail this route's test if axe-core detects violations.
-      expect(results.violations).toEqual([]);
+      // 🚨 Log concise violation details and affected elements.
+      if (results.violations.length > 0) {
+        console.log(`\n🚨 === VIOLATION DETAILS FOR: ${route} ===`);
+
+        for (const violation of results.violations) {
+          console.log(`\n❌ ${violation.id}: ${violation.help}`);
+
+          for (const node of violation.nodes) {
+            console.log(`📍 Element: ${node.target.join(" > ")}`);
+
+            for (const check of [...node.any, ...node.all, ...node.none]) {
+              if (check.message) {
+                console.log(`   Reason: ${check.message}`);
+              }
+            }
+          }
+        }
+
+        console.log("\n🚨 === END VIOLATION DETAILS ===");
+      }
+
+      // ✅ Fail on violations while preserving Playwright's source location.
+      expect(results.violations.length).toBe(0);
     });
   });
 }

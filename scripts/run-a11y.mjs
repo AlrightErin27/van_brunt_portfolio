@@ -1,5 +1,5 @@
 import { createInterface } from "node:readline/promises";
-import { stdin, stdout, stderr } from "node:process";
+import { stdin, stdout } from "node:process";
 import { spawn } from "node:child_process";
 import {
   mkdirSync,
@@ -10,8 +10,8 @@ import {
 import { join } from "node:path";
 
 const terminal = createInterface({ input: stdin, output: stdout });
-
 const registryPath = join("tests", "a11y-routes.json");
+
 let reportPath = null;
 
 try {
@@ -30,7 +30,6 @@ try {
 
   let route = null;
 
-  // 📍 Request a route for single-page testing.
   if (choice === "1") {
     route = (
       await terminal.question("📍 Enter page route (e.g. /resume): ")
@@ -41,13 +40,16 @@ try {
     }
   }
 
-  // 📚 Load the registered testing routes.
+  // 📚 Load registered routes.
   const registeredRoutes = JSON.parse(readFileSync(registryPath, "utf8"));
 
   if (
     !Array.isArray(registeredRoutes) ||
     !registeredRoutes.every(
-      (item) => typeof item === "string" && item.startsWith("/"),
+      (item) =>
+        typeof item === "string" &&
+        item.startsWith("/") &&
+        !item.startsWith("//"),
     )
   ) {
     throw new Error("The accessibility route registry is invalid.");
@@ -57,67 +59,37 @@ try {
     throw new Error("No routes have been registered yet.");
   }
 
-  // 📝 Capture a note for the testing history.
+  // 📝 Capture the testing note.
   const note = (await terminal.question("📝 Testing note (required): ")).trim();
 
   if (!note) {
     throw new Error("A testing note is required.");
   }
 
-  const timestamp = new Date().toISOString();
+  const date = new Date();
+  const timestamp = date.toISOString();
   const testRoutes = choice === "1" ? [route] : registeredRoutes;
 
   console.log("\n📋 === Test Run Details ===");
   console.log(`🕒 Timestamp: ${timestamp}`);
-  console.log(`📍 Scope: ${choice === "1" ? route : "All registered routes"}`);
+  console.log(`📍 Routes: ${testRoutes.join(", ")}`);
   console.log(`📝 Note: ${note}`);
 
   if (choice === "2") {
     console.log("\n📚 Registered routes:");
+
     for (const path of registeredRoutes) {
       console.log(`   • ${path}`);
     }
   }
 
-  // 📁 Save each report as a timestamped file using local time.
-  const date = new Date(timestamp);
-  const month = date.toLocaleString("en-US", { month: "short" });
-  const pad = (value) => String(value).padStart(2, "0");
-
-  const fileName =
-    `${month}${pad(date.getDate())}_${date.getFullYear()}_` +
-    `${pad(date.getHours())}-${pad(date.getMinutes())}-` +
-    `${pad(date.getSeconds())}.txt`;
-
-  mkdirSync("a11y-reports", { recursive: true });
-
-  reportPath = join("a11y-reports", fileName);
-
-  // 📋 Save the testing context.
-  writeFileSync(
-    reportPath,
-    [
-      "♿ ACCESSIBILITY QA TEST REPORT",
-      "===================================",
-      `Started: ${timestamp}`,
-      `Scope: ${choice === "1" ? "Single route" : "All registered routes"}`,
-      `Routes: ${testRoutes.join(", ")}`,
-      `Testing Note: ${note}`,
-      "",
-      "=== PLAYWRIGHT & AXE-CORE RESULTS ===",
-      "",
-    ].join("\n"),
-    "utf8",
-  );
-
-  // 🚀 Release terminal input and start Playwright.
+  // 🚀 Run Playwright before creating a report.
   terminal.close();
-
-  console.log("\n🚀 === Running Accessibility Tests ===\n");
+  console.log("\n🚀 Running accessibility tests...\n");
 
   const child = spawn(
     "npx",
-    ["playwright", "test", "tests/route.accessibility.spec.ts"],
+    ["playwright", "test", "tests/route.accessibility.spec.ts", "--workers=1"],
     {
       env: {
         ...process.env,
@@ -128,27 +100,180 @@ try {
     },
   );
 
-  // 📊 Display verbose results and save them to the report.
-  const saveOutput = (stream, destination) => {
-    stream.on("data", (chunk) => {
-      destination.write(chunk);
-      appendFileSync(reportPath, chunk);
-    });
-  };
+  // 📋 Capture complete output for possible reporting.
+  let capturedOutput = "";
 
-  saveOutput(child.stdout, stdout);
-  saveOutput(child.stderr, stderr);
+  for (const stream of [child.stdout, child.stderr]) {
+    stream.on("data", (chunk) => {
+      capturedOutput += chunk.toString("utf8");
+    });
+  }
 
   // ⏳ Wait for Playwright to finish.
-  const exitCode = await new Promise((resolve, reject) => {
+  let exitCode = await new Promise((resolve, reject) => {
     child.once("error", reject);
     child.once("close", (code) => resolve(code ?? 1));
   });
 
+  // 📊 Extract completed axe-core scans.
+  console.log("\n📊 === Accessibility Scan Summary ===\n");
+
+  const sections = capturedOutput.split(/📍 === RESULTS FOR: (.+?) ===/g);
+
+  const scannedRoutes = [];
+
+  for (let i = 1; i < sections.length; i += 2) {
+    const scannedRoute = sections[i].trim();
+    const details = sections[i + 1] ?? "";
+
+    const getCount = (category) => {
+      const match = details.match(new RegExp(`${category} \\((\\d+)\\)`));
+
+      return match ? Number(match[1]) : null;
+    };
+
+    const passes = getCount("PASSES");
+    const violations = getCount("VIOLATIONS");
+    const incomplete = getCount("INCOMPLETE");
+    const inapplicable = getCount("INAPPLICABLE");
+
+    if (
+      passes === null ||
+      violations === null ||
+      incomplete === null ||
+      inapplicable === null
+    ) {
+      console.log(`⚠️ ${scannedRoute}: Results unavailable\n`);
+      continue;
+    }
+
+    scannedRoutes.push(scannedRoute);
+
+    console.log(`${violations === 0 ? "✅" : "❌"} Route: ${scannedRoute}`);
+    console.log(`   ✅ Passing rules: ${passes}`);
+    console.log(`   ❌ Violations: ${violations}`);
+    console.log(`   ⚠️ Incomplete rules: ${incomplete}`);
+    console.log(`   ➖ Inapplicable rules: ${inapplicable}\n`);
+  }
+
+  // ⚠️ Never treat missing scan results as a successful test.
+  const allScansCompleted = testRoutes.every((path) =>
+    scannedRoutes.includes(path),
+  );
+
+  if (exitCode === 0 && !allScansCompleted) {
+    exitCode = 1;
+  }
+
   process.exitCode = exitCode;
 
-  // 📌 Register new routes only after successful single-route tests.
-  if (choice === "1" && exitCode === 0) {
+  if (scannedRoutes.length === 0) {
+    console.log("⚠️ No valid route completed an axe-core scan.");
+  }
+
+  // 🚨 Show concise violations while keeping the full report.
+  if (exitCode !== 0) {
+    console.log("\n🚨 === Accessibility Violations ===\n");
+
+    const violationBlocks = [
+      ...capturedOutput.matchAll(
+        /🚨 === VIOLATION DETAILS FOR: ([^\r\n]+) ===\r?\n([\s\S]*?)\r?\n🚨 === END VIOLATION DETAILS ===/g,
+      ),
+    ];
+
+    if (violationBlocks.length > 0) {
+      for (const [, failedRoute, details] of violationBlocks) {
+        console.log(`📍 Route: ${failedRoute}`);
+        console.log(details.trim());
+        console.log("");
+      }
+    } else {
+      // 🔍 Show useful errors if no axe-core violation was logged.
+      const errors = capturedOutput
+        .split(/\r?\n/)
+        .filter((line) =>
+          /Error:|Route .*must load successfully|Expected:|Received:/.test(
+            line,
+          ),
+        )
+        .slice(0, 8);
+
+      console.log(
+        errors.join("\n") || "No completed violation details available.",
+      );
+    }
+
+    // 🧩 Preserve the failing Playwright assertion and its code location.
+    const failingLine = capturedOutput.match(/^\s*>\s*\d+\s*\|.*$/m);
+
+    const sourceLocation = capturedOutput.match(
+      /^\s*at (.*tests\/[^\r\n]+\.spec\.ts:\d+:\d+)\s*$/m,
+    );
+
+    if (failingLine || sourceLocation) {
+      console.log("\n🧩 === Test Failure Location ===");
+
+      if (failingLine) {
+        console.log(failingLine[0].trim());
+      }
+
+      if (sourceLocation) {
+        console.log(sourceLocation[1]);
+      }
+    }
+
+    if (scannedRoutes.length > 0) {
+      console.log("\n📁 Full failure details will be saved in the report.");
+    }
+  }
+
+  const verdict =
+    exitCode === 0
+      ? "PASS — No automated test failures detected"
+      : "FAIL — Review the accessibility test results";
+
+  // 📁 Save a report only if an axe-core scan completed.
+  if (scannedRoutes.length > 0) {
+    const month = date.toLocaleString("en-US", {
+      month: "short",
+    });
+
+    const pad = (value) => String(value).padStart(2, "0");
+
+    const fileName =
+      `${month}${pad(date.getDate())}_${date.getFullYear()}_` +
+      `${pad(date.getHours())}-${pad(date.getMinutes())}-` +
+      `${pad(date.getSeconds())}-${pad(date.getMilliseconds())}.txt`;
+
+    mkdirSync("a11y-reports", { recursive: true });
+    reportPath = join("a11y-reports", fileName);
+
+    writeFileSync(
+      reportPath,
+      [
+        "♿ ACCESSIBILITY QA TEST REPORT",
+        "===================================",
+        `Started: ${timestamp}`,
+        `Completed: ${new Date().toISOString()}`,
+        `Scope: ${choice === "1" ? "Single route" : "All registered routes"}`,
+        `Requested Routes: ${testRoutes.join(", ")}`,
+        `Scanned Routes: ${scannedRoutes.join(", ")}`,
+        `Testing Note: ${note}`,
+        "",
+        "=== PLAYWRIGHT & AXE-CORE RESULTS ===",
+        "",
+        capturedOutput,
+        "",
+        "=== FINAL VERDICT ===",
+        `Result: ${verdict}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+  }
+
+  // 📌 Register valid routes, even when accessibility tests fail.
+  if (choice === "1" && scannedRoutes.includes(route)) {
     if (!registeredRoutes.includes(route)) {
       registeredRoutes.push(route);
 
@@ -157,44 +282,30 @@ try {
         JSON.stringify(registeredRoutes, null, 2) + "\n",
       );
 
-      console.log(`\n📌 New route registered: ${route}`);
-      appendFileSync(reportPath, `\nRegistered route: ${route}\n`);
+      console.log(`📌 New route registered: ${route}`);
+
+      if (reportPath) {
+        appendFileSync(reportPath, `Registered route: ${route}\n`);
+      }
     } else {
-      console.log(`\n📌 Route already registered: ${route}`);
+      console.log(`📌 Route already registered: ${route}`);
     }
   }
 
-  // ✅ Record the final test verdict.
-  const verdict =
-    exitCode === 0
-      ? "PASS — No automated test failures detected"
-      : "FAIL — Review the accessibility test results";
-
-  appendFileSync(
-    reportPath,
-    [
-      "",
-      "=== FINAL VERDICT ===",
-      `Completed: ${new Date().toISOString()}`,
-      `Result: ${verdict}`,
-      "",
-    ].join("\n"),
-  );
-
+  // ✅ Display the final verdict.
   console.log(
     exitCode === 0
       ? "\n✅ Accessibility tests passed!"
-      : "\n❌ Accessibility tests failed. Review the findings.",
+      : "\n❌ Accessibility tests failed.",
   );
 
-  console.log(`\n📁 Detailed report saved to: ${reportPath}`);
+  if (reportPath) {
+    console.log(`\n📁 Detailed report saved to: ${reportPath}`);
+  } else {
+    console.log("\n📁 No report created — no valid route completed a scan.");
+  }
 } catch (error) {
   console.error(`\n❌ Error: ${error.message}`);
-
-  if (reportPath) {
-    appendFileSync(reportPath, `\nERROR: ${error.message}\n`);
-  }
-
   process.exitCode = 1;
 } finally {
   terminal.close();

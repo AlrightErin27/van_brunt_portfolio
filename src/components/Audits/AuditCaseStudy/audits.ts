@@ -61,6 +61,12 @@ export const audits: Audit[] = [
     methodology: [""],
     reports: [
       {
+        title: "Accessibility Audit Summation",
+        description: "Audit of Home Page",
+        pageCount: 4,
+        pdfHref: "/audits/evb-portfolio/EvbPortfolioAccessibilityAudit.pdf",
+      },
+      {
         title: "Keyboard Accessibility Evaluation",
         description: "Audit of Home Page",
         pageCount: 2,

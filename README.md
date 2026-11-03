@@ -53,17 +53,20 @@ Changes pushed to the `main` branch on GitHub automatically trigger a new produc
 
 ## Accessibility Testing
 
-This project uses **Playwright** and **axe-core** to implement automated accessibility regression testing targeting WCAG 2.2 Level AA.
+This project implements automated accessibility regression testing using **Playwright** and **axe-core**, targeting applicable WCAG 2.2 Level A and AA success criteria.
 
-Automated testing supplements previously completed manual accessibility evaluations covering keyboard navigation, semantic HTML, visual accessibility, and Safari VoiceOver.
+The testing framework is designed to identify automatically detectable accessibility issues, document findings, and monitor previously tested pages as the website evolves.
+
+Automated testing complements manual accessibility evaluations involving keyboard navigation, semantic HTML, visual accessibility, and Safari VoiceOver. Automated scans cannot establish full WCAG conformance on their own.
 
 ### Testing Tools
 
 - **Playwright (`@playwright/test`):** Browser automation, test execution, and assertions.
-- **axe-core (`@axe-core/playwright`):** Automated WCAG accessibility rule checks integrated with Playwright.
-- **Chromium:** Browser environment for local automated testing.
+- **axe-core (`@axe-core/playwright`):** Automated accessibility rule checks integrated with Playwright.
+- **Chromium:** Browser environment used for automated testing.
+- **Node.js:** Runs the interactive testing interface, manages the route registry, and generates reports.
 
-### Running the Tests
+### Setup
 
 Install project dependencies:
 
@@ -77,10 +80,92 @@ Install Playwright's Chromium browser:
 npx playwright install chromium
 ```
 
-Run the automated tests:
+### Running Accessibility Tests
+
+Start the interactive accessibility testing runner:
 
 ```bash
-npx playwright test
+npm run test:a11y
 ```
 
-Playwright automatically starts the local Astro development server when needed, launches Chromium, and executes the tests.
+The runner provides two testing options:
+
+**Option 1 — Test a Specific Route**
+
+Enter a local route, such as `/resume` or `/audits`, to perform an accessibility scan of that page.
+
+Valid routes are automatically added to the testing registry after a completed scan, regardless of whether accessibility violations are detected.
+
+**Option 2 — Test All Registered Routes**
+
+Automatically scan every route listed in `tests/a11y-routes.json`.
+
+This supports regression testing across previously evaluated pages following website changes.
+
+Both options require a testing note to document the purpose or context of the execution.
+
+Playwright automatically starts the local Astro development server when needed, launches Chromium, and executes the selected tests.
+
+### Test Results and Reporting
+
+The terminal provides a concise summary for each tested route, including:
+
+- Number of passing accessibility rules.
+- Number of detected violations.
+- Number of incomplete checks requiring review.
+- Number of inapplicable rules.
+
+When violations are detected, the terminal also identifies the affected elements, provides explanations, and displays the Playwright test assertion location.
+
+Complete results are saved as timestamped text files in the `a11y-reports/` directory.
+
+Example:
+
+```text
+a11y-reports/
+  Nov03_2026_12-27-11-519.txt
+```
+
+Each report includes:
+
+- Test date, time, and scope.
+- Routes evaluated.
+- Testing note.
+- Full axe-core rule results.
+- Details of incomplete checks and detected violations.
+- Playwright diagnostic output and final test verdict.
+
+Reports are stored locally and excluded from version control.
+
+Invalid routes that do not complete an accessibility scan are not registered and do not generate a report.
+
+### Test Organization
+
+```text
+playwright.config.ts
+scripts/
+  run-a11y.mjs
+tests/
+  a11y-routes.json
+  route.accessibility.spec.ts
+a11y-reports/
+  [timestamped report files]
+```
+
+- `playwright.config.ts` configures the browser, test environment, and local development server.
+- `scripts/run-a11y.mjs` manages the interactive testing workflow and report generation.
+- `tests/a11y-routes.json` stores previously evaluated routes for regression testing.
+- `tests/route.accessibility.spec.ts` executes the axe-core accessibility checks.
+- `a11y-reports/` contains locally generated testing records.
+
+### Testing Scope and Limitations
+
+Current automated tests use axe-core rules associated with WCAG 2.0, 2.1, and 2.2 Level A and AA.
+
+Passing automated tests indicate that no violations were detected by the configured rules during that execution. They do not guarantee that a page fully conforms to WCAG 2.2 AA.
+
+Incomplete findings are documented for manual review rather than treated as automatic failures.
+
+Future improvements may include custom Playwright assertions for keyboard interaction, focus management, skip navigation, semantic structure, and interactive component accessibility.
+
+Manual testing remains an essential part of the accessibility evaluation process.

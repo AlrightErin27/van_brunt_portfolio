@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local accessibility test reports and Playwright artifacts
+test-results/
+playwright-report/
+# Persistent local accessibility QA reports
+a11y-reports/

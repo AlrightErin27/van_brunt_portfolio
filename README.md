@@ -52,3 +52,11 @@ npm run preview
 The site is deployed through Vercel.
 
 Changes pushed to the `main` branch on GitHub will automatically trigger a new production deployment.
+
+## Playwright Testing
+
+To run testing:
+
+```bash
+npx playwright test
+```

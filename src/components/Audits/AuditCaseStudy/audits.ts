@@ -72,6 +72,13 @@ export const audits: Audit[] = [
         pageCount: 3,
         pdfHref: "/audits/evb-portfolio/EvbPortfolioSemanticEvaluation.pdf",
       },
+      {
+        title: "Visual Accessibility Evaluation",
+        description: "Audit of Home Page",
+        pageCount: 4,
+        pdfHref:
+          "/audits/evb-portfolio/EvbPortfolioVisualAccessibilityEvaluation.pdf",
+      },
     ],
     videoUrl: "",
     reflectionUrl: "",

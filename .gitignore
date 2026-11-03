@@ -24,7 +24,7 @@ pnpm-debug.log*
 .idea/
 
 # Local accessibility test reports and Playwright artifacts
-test-results/
+test-results/*
 playwright-report/
 # Persistent local accessibility QA reports
 a11y-reports/

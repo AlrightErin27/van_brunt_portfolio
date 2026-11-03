@@ -1,6 +1,5 @@
 ---
 import type { AuditReport } from "../audits";
-
 import "./AuditReports.css";
 
 type Props = {
@@ -8,50 +7,180 @@ type Props = {
 };
 
 const { reports } = Astro.props;
+
+type ReportGroup = {
+  page?: string;
+  main?: AuditReport;
+  supporting: AuditReport[];
+};
+
+// Group reports by evaluated page.
+// Reports without a main report retain the original card layout.
+const groups: ReportGroup[] = [];
+
+for (const report of reports) {
+  let group = groups.find((item) => item.page === report.page);
+
+  if (!group) {
+    group = {
+      page: report.page,
+      supporting: [],
+    };
+    groups.push(group);
+  }
+
+  if (report.role === "main") {
+    group.main = report;
+  } else {
+    group.supporting.push(report);
+  }
+}
 ---
 
-<!-- Reusable list of accessibility evaluation reports -->
 <div class="audit-reports">
-  <ul class="audit-reports__list">
-    {
-      reports.map((report) => (
-        <li class="audit-reports__item">
-          <article class="audit-reports__card">
+  {
+    groups.map((group) => (
+      <div class="audit-reports__group">
+        {group.main ? (
+          /* Main report and its nested supporting evaluations */
+          <article class="audit-reports__card audit-reports__card--main">
             <div class="audit-reports__content">
-              <p class="audit-reports__meta">PDF · {report.pageCount} pages</p>
+              <p class="audit-reports__meta">
+                Main audit report · PDF · {group.main.pageCount} pages
+              </p>
 
-              <h3 class="audit-reports__title">{report.title}</h3>
+              <h3 class="audit-reports__title">{group.main.title}</h3>
 
-              <p class="audit-reports__description">{report.description}</p>
+              <p class="audit-reports__description">{group.main.description}</p>
             </div>
 
-            <div class="audit-reports__actions">
+            <div class="audit-reports__actions audit-reports__actions--main">
               <a
                 class="audit-case-study__button"
-                href={report.pdfHref}
+                href={group.main.pdfHref}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 View PDF
                 <span class="visually-hidden">
-                  : {report.title} (opens in a new tab)
+                  : {group.main.title} (opens in a new tab)
                 </span>
                 <span aria-hidden="true">↗</span>
               </a>
 
               <a
                 class="audit-case-study__button"
-                href={report.pdfHref}
+                href={group.main.pdfHref}
                 download
               >
                 Download PDF
-                <span class="visually-hidden">: {report.title}</span>
+                <span class="visually-hidden">: {group.main.title}</span>
                 <span aria-hidden="true">↓</span>
               </a>
             </div>
+
+            {/* Supporting reports remain visible inside the main card */}
+            {group.supporting.length > 0 && (
+              <div class="audit-reports__supporting">
+                <h4 class="audit-reports__supporting-heading">
+                  Supporting individual evaluations ({group.supporting.length})
+                </h4>
+
+                <ul class="audit-reports__supporting-list">
+                  {group.supporting.map((report) => (
+                    <li class="audit-reports__supporting-item">
+                      <div class="audit-reports__supporting-content">
+                        <p class="audit-reports__supporting-title">
+                          {report.title}
+                        </p>
+
+                        <p class="audit-reports__supporting-meta">
+                          PDF · {report.pageCount} pages
+                        </p>
+
+                        <p class="audit-reports__supporting-description">
+                          {report.description}
+                        </p>
+                      </div>
+
+                      <div class="audit-reports__actions audit-reports__actions--supporting">
+                        <a
+                          class="audit-case-study__button"
+                          href={report.pdfHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View PDF
+                          <span class="visually-hidden">
+                            : {report.title} (opens in a new tab)
+                          </span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+
+                        <a
+                          class="audit-case-study__button"
+                          href={report.pdfHref}
+                          download
+                        >
+                          Download PDF
+                          <span class="visually-hidden">: {report.title}</span>
+                          <span aria-hidden="true">↓</span>
+                        </a>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </article>
-        </li>
-      ))
-    }
-  </ul>
+        ) : (
+          /* Original layout for audits without a main report */
+          <ul class="audit-reports__list">
+            {group.supporting.map((report) => (
+              <li class="audit-reports__item">
+                <article class="audit-reports__card">
+                  <div class="audit-reports__content">
+                    <p class="audit-reports__meta">
+                      PDF · {report.pageCount} pages
+                    </p>
+
+                    <h3 class="audit-reports__title">{report.title}</h3>
+
+                    <p class="audit-reports__description">
+                      {report.description}
+                    </p>
+                  </div>
+
+                  <div class="audit-reports__actions">
+                    <a
+                      class="audit-case-study__button"
+                      href={report.pdfHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View PDF
+                      <span class="visually-hidden">
+                        : {report.title} (opens in a new tab)
+                      </span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+
+                    <a
+                      class="audit-case-study__button"
+                      href={report.pdfHref}
+                      download
+                    >
+                      Download PDF
+                      <span class="visually-hidden">: {report.title}</span>
+                      <span aria-hidden="true">↓</span>
+                    </a>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))
+  }
 </div>

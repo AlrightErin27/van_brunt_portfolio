@@ -417,6 +417,29 @@
 }
 
 /* =========================================================
+   REFLECTION — BLOG POSTS
+   ========================================================= */
+
+.audit-case-study__reflection-posts {
+  display: grid;
+  gap: var(--space-3);
+
+  margin: var(--space-5) 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.audit-case-study__reflection-posts .audit-case-study__button {
+  margin-block-start: 0;
+  max-inline-size: 100%;
+
+  white-space: normal;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
    RESPONSIVE — TABLET AND MOBILE
    ========================================================= */
 

@@ -1,6 +1,7 @@
 ---
 import type { Audit } from "./audits";
 import AuditReports from "./AuditReports/AuditReports.astro";
+import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
 import "./AuditCaseStudy.css";
 import { Image } from "astro:assets";
@@ -226,7 +227,14 @@ const { audit } = Astro.props;
                 href={post.url}
               >
                 {post.title}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">                          <span aria-hidden="true">
+                            <ArrowUpRightIcon
+                              size={20}
+                              weight="bold"
+                              aria-hidden={true}
+                              focusable={false}
+                            />
+                          </span></span>
               </a>
             </li>
           ))}

@@ -1,5 +1,7 @@
 ---
 import type { AuditReport } from "../audits";
+
+import { ArrowSquareOutIcon, DownloadSimpleIcon } from "@phosphor-icons/react";
 import "./AuditReports.css";
 
 type Props = {
@@ -65,7 +67,14 @@ for (const report of reports) {
                 <span class="visually-hidden">
                   : {group.main.title} (opens in a new tab)
                 </span>
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">
+                  <ArrowSquareOutIcon
+                    size={20}
+                    weight="bold"
+                    aria-hidden={true}
+                    focusable={false}
+                  />
+                </span>
               </a>
 
               <a
@@ -114,7 +123,14 @@ for (const report of reports) {
                           <span class="visually-hidden">
                             : {report.title} (opens in a new tab)
                           </span>
-                          <span aria-hidden="true">↗</span>
+                          <span aria-hidden="true">
+                            <ArrowSquareOutIcon
+                              size={20}
+                              weight="bold"
+                              aria-hidden={true}
+                              focusable={false}
+                            />
+                          </span>
                         </a>
 
                         <a
@@ -124,7 +140,14 @@ for (const report of reports) {
                         >
                           Download PDF
                           <span class="visually-hidden">: {report.title}</span>
-                          <span aria-hidden="true">↓</span>
+                          <span aria-hidden="true">
+                            <DownloadSimpleIcon
+                              size={20}
+                              weight="bold"
+                              aria-hidden={true}
+                              focusable={false}
+                            />
+                          </span>
                         </a>
                       </div>
                     </li>
@@ -172,7 +195,14 @@ for (const report of reports) {
                     >
                       Download PDF
                       <span class="visually-hidden">: {report.title}</span>
-                      <span aria-hidden="true">↓</span>
+                      <span aria-hidden="true">
+                        <DownloadSimpleIcon
+                          size={20}
+                          weight="bold"
+                          aria-hidden={true}
+                          focusable={false}
+                        />
+                      </span>
                     </a>
                   </div>
                 </article>

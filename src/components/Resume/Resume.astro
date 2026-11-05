@@ -1,5 +1,5 @@
 ---
-import { DownloadSimpleIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, ArrowSquareOutIcon } from "@phosphor-icons/react";
 import "./Resume.css";
 
 const resumePDF = "/resumes/ErinVanBrunt_DigitalAccessibilityResume2026.pdf";
@@ -67,6 +67,26 @@ const resumeDOCX = "/resumes/ErinVanBrunt_DigitalAccessibilityResume2026.docx";
           <span>Download PDF resume</span>
 
           <DownloadSimpleIcon
+            className="resume-download__icon"
+            size={20}
+            weight="bold"
+            aria-hidden={true}
+            focusable={false}
+          />
+        </a>
+
+        <a
+          class="resume-download"
+          href={resumePDF}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            View PDF resume
+            <span class="visually-hidden"> (opens in a new tab) </span>
+          </span>
+
+          <ArrowSquareOutIcon
             className="resume-download__icon"
             size={20}
             weight="bold"
